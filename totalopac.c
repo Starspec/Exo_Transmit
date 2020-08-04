@@ -146,20 +146,20 @@ void TotalOpac() {
   
   /* Allocate Memory */
   
-  opac_CIA_H2H2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_H2He = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_H2H = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_H2CH4 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_CH4Ar = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_CH4CH4 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_CO2CO2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_HeH = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_N2CH4 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_N2H2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_N2N2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_O2CO2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_O2N2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
-  opac_CIA_O2O2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
+  opac_CIA_H2H2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_H2He = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_H2H = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_H2CH4 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_CH4Ar = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_CH4CH4 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_CO2CO2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_HeH = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_N2CH4 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_N2H2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_N2N2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_O2CO2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_O2N2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
+  opac_CIA_O2O2 = dmatrix(0, NPRESSURE-1, 0, NLAMBDA-1);
   
   /* Read Chemistry Table */
   
@@ -169,24 +169,24 @@ void TotalOpac() {
   /* Allocate for total opacity */
 
   opac.name = "Total";          //Name it Total
-  opac.T = dvector(0, NTEMP-1); //Declare T, P, Plog10, and kappa arrays
+  opac.T = dvector(0, NPRESSURE-1); //Declare T, P, Plog10, and kappa arrays
   opac.P = dvector(0, NPRESSURE-1);
   opac.Plog10 = dvector(0, NPRESSURE-1);
-  opac.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-  opac.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+  opac.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+  opac.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
   
   //populate with zeros	
   for (i=0; i<NLAMBDA; i++)
     for (j=0; j<NPRESSURE; j++)
-      for (k=0; k<NTEMP; k++)
+      for (k=0; k<NPRESSURE; k++)
 	opac.kappa[i][j][k] = 0.;
   
   /* Fill in mean molecular weight (mu) values */
   
-  chem.mu = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+  chem.mu = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
   
   for (j=0; j<NPRESSURE; j++) {
-    for (k=0; k<NTEMP; k++) {
+    for (k=0; k<NPRESSURE; k++) {
       chem.mu[j][k] = 
 	chem.H2[j][k]* m_H2 
 	+ chem.H[j][k]* m_H 
@@ -230,14 +230,14 @@ void TotalOpac() {
   /* Fill in CH4 opacities */
   if(chemSelection[0] == 1){          //If CH4 is selected
     opacCH4.name = "CH4";             //Name it CH4
-    opacCH4.T = dvector(0, NTEMP-1);  //Declare T, P, Plog10, and kappa arrays
+    opacCH4.T = dvector(0, NPRESSURE-1);  //Declare T, P, Plog10, and kappa arrays
     opacCH4.P = dvector(0, NPRESSURE-1);
     opacCH4.Plog10 = dvector(0, NPRESSURE-1);
-    opacCH4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    opacCH4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
     /* Declare abundance */
-    opacCH4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacCH4.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	/* Fill with chemistry abundance */
 	opacCH4.abundance[j][k] = chem.CH4[j][k];  
       }
@@ -248,7 +248,7 @@ void TotalOpac() {
     /* Populate opac.kappa */
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  /* Add to overall opac.kappa */
 	  opac.kappa[i][j][k] += opacCH4.kappa[i][j][k];  
     
@@ -262,13 +262,13 @@ void TotalOpac() {
   /* Fill in CO2 opacities */
   if(chemSelection[1] == 1){
     opacCO2.name = "CO2";
-    opacCO2.T = dvector(0, NTEMP-1);
+    opacCO2.T = dvector(0, NPRESSURE-1);
     opacCO2.P = dvector(0, NPRESSURE-1);
     opacCO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacCO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacCO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacCO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacCO2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){ 
+      for(k=0; k<NPRESSURE; k++){ 
 	opacCO2.abundance[j][k] = chem.CO2[j][k];
       }
     }
@@ -277,7 +277,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacCO2.kappa[i][j][k];
     
     printf("Read CO2 Opacity done\n");
@@ -288,13 +288,13 @@ void TotalOpac() {
   /* Fill in CO opacities */
   if(chemSelection[2] == 1){
     opacCO.name = "CO";
-    opacCO.T = dvector(0, NTEMP-1);
+    opacCO.T = dvector(0, NPRESSURE-1);
     opacCO.P = dvector(0, NPRESSURE-1);
     opacCO.Plog10 = dvector(0, NPRESSURE-1);
-    opacCO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacCO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacCO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacCO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacCO.abundance[j][k] = chem.CO[j][k];
       }
     }
@@ -303,7 +303,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for(i=0; i<NLAMBDA; i++)
       for(j=0; j<NPRESSURE; j++)
-	for(k=0; k<NTEMP; k++)
+	for(k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacCO.kappa[i][j][k];
     
     printf("Read CO Opacity done\n");
@@ -314,13 +314,13 @@ void TotalOpac() {
   /* Fill in H2O opacities */
   if(chemSelection[3] == 1){
     opacH2O.name = "H2O";
-    opacH2O.T = dvector(0, NTEMP-1);
+    opacH2O.T = dvector(0, NPRESSURE-1);
     opacH2O.P = dvector(0, NPRESSURE-1);
     opacH2O.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2O.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2O.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacH2O.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacH2O.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacH2O.abundance[j][k] = chem.H2O[j][k];
       }
     }
@@ -329,7 +329,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacH2O.kappa[i][j][k];
     
     printf("Read H2O Opacity done\n");
@@ -340,13 +340,13 @@ void TotalOpac() {
   /* Fill in NH3 opacities */
   if(chemSelection[4] == 1){
     opacNH3.name = "NH3";
-    opacNH3.T = dvector(0, NTEMP-1);
+    opacNH3.T = dvector(0, NPRESSURE-1);
     opacNH3.P = dvector(0, NPRESSURE-1);
     opacNH3.Plog10 = dvector(0, NPRESSURE-1);
-    opacNH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);  
+    opacNH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacNH3.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);  
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacNH3.abundance[j][k] = chem.NH3[j][k];
       }
     }
@@ -355,7 +355,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacNH3.kappa[i][j][k];
     
     printf("Read NH3 Opacity done\n");
@@ -366,13 +366,13 @@ void TotalOpac() {
   /* Fill in O2 opacities */
   if(chemSelection[5] == 1){
     opacO2.name = "O2";
-    opacO2.T = dvector(0, NTEMP-1);
+    opacO2.T = dvector(0, NPRESSURE-1);
     opacO2.P = dvector(0, NPRESSURE-1);
     opacO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacO2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacO2.abundance[j][k] = chem.O2[j][k];
       }
     }
@@ -381,7 +381,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for(i=0; i<NLAMBDA; i++)
       for(j=0; j<NPRESSURE; j++)
-	for(k=0; k<NTEMP; k++)
+	for(k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacO2.kappa[i][j][k];
     
     printf("Read O2 Opacity done\n");
@@ -392,13 +392,13 @@ void TotalOpac() {
   /* Fill in O3 opacities */
   if(chemSelection[6] == 1){
     opacO3.name = "O3";
-    opacO3.T = dvector(0, NTEMP-1);
+    opacO3.T = dvector(0, NPRESSURE-1);
     opacO3.P = dvector(0, NPRESSURE-1);
     opacO3.Plog10 = dvector(0, NPRESSURE-1);
-    opacO3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacO3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacO3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacO3.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacO3.abundance[j][k] = chem.O3[j][k];
       }
     }
@@ -407,7 +407,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacO3.kappa[i][j][k];
     
     printf("Read O3 Opacity done\n");
@@ -418,13 +418,13 @@ void TotalOpac() {
   /* Fill in C2H2 opacities */
   if(chemSelection[7] == 1){
     opacC2H2.name = "C2H2";
-    opacC2H2.T = dvector(0, NTEMP-1);
+    opacC2H2.T = dvector(0, NPRESSURE-1);
     opacC2H2.P = dvector(0, NPRESSURE-1);
     opacC2H2.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacC2H2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacC2H2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacC2H2.abundance[j][k] = chem.C2H2[j][k];
       }
     }
@@ -433,7 +433,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacC2H2.kappa[i][j][k];
     
     printf("Read C2H2 Opacity done\n");
@@ -444,13 +444,13 @@ void TotalOpac() {
   /* Fill in C2H4 opacities */
   if(chemSelection[8] == 1){
     opacC2H4.name = "C2H4";
-    opacC2H4.T = dvector(0, NTEMP-1);
+    opacC2H4.T = dvector(0, NPRESSURE-1);
     opacC2H4.P = dvector(0, NPRESSURE-1);
     opacC2H4.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacC2H4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacC2H4.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacC2H4.abundance[j][k] = chem.C2H4[j][k];
       }
     }
@@ -459,7 +459,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacC2H4.kappa[i][j][k];
     
     printf("Read C2H4 Opacity done\n");
@@ -470,13 +470,13 @@ void TotalOpac() {
   /* Fill in C2H6 opacities */
   if(chemSelection[9] == 1){
     opacC2H6.name = "C2H6";
-    opacC2H6.T = dvector(0, NTEMP-1);
+    opacC2H6.T = dvector(0, NPRESSURE-1);
     opacC2H6.P = dvector(0, NPRESSURE-1);
     opacC2H6.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H6.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H6.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacC2H6.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacC2H6.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacC2H6.abundance[j][k] = chem.C2H6[j][k];
       }
     }
@@ -485,7 +485,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacC2H6.kappa[i][j][k];
     
     printf("Read C2H6 Opacity done\n");
@@ -496,13 +496,13 @@ void TotalOpac() {
   /* Fill in H2CO opacities */
   if(chemSelection[10] == 1){
     opacH2CO.name = "H2CO";
-    opacH2CO.T = dvector(0, NTEMP-1);
+    opacH2CO.T = dvector(0, NPRESSURE-1);
     opacH2CO.P = dvector(0, NPRESSURE-1);
     opacH2CO.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2CO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2CO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacH2CO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacH2CO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacH2CO.abundance[j][k] = chem.H2CO[j][k];
       }
     }
@@ -511,7 +511,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacH2CO.kappa[i][j][k];
     
     printf("Read H2CO Opacity done\n");
@@ -522,13 +522,13 @@ void TotalOpac() {
   /* Fill in H2S opacities */
   if(chemSelection[11] == 1){
     opacH2S.name = "H2S";
-    opacH2S.T = dvector(0, NTEMP-1);
+    opacH2S.T = dvector(0, NPRESSURE-1);
     opacH2S.P = dvector(0, NPRESSURE-1);
     opacH2S.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2S.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2S.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacH2S.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacH2S.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacH2S.abundance[j][k] = chem.H2S[j][k];
       }
     }
@@ -537,7 +537,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacH2S.kappa[i][j][k];
     
     printf("Read H2S Opacity done\n");
@@ -548,13 +548,13 @@ void TotalOpac() {
   /* Fill in HCl opacities */
   if(chemSelection[12] == 1){
     opacHCl.name = "HCl";
-    opacHCl.T = dvector(0, NTEMP-1);
+    opacHCl.T = dvector(0, NPRESSURE-1);
     opacHCl.P = dvector(0, NPRESSURE-1);
     opacHCl.Plog10 = dvector(0, NPRESSURE-1);
-    opacHCl.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHCl.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacHCl.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacHCl.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacHCl.abundance[j][k] = chem.HCl[j][k];
       }
     }
@@ -563,7 +563,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacHCl.kappa[i][j][k];
     
     printf("Read HCl Opacity done\n");
@@ -574,13 +574,13 @@ void TotalOpac() {
   /* Fill in HCN opacities */
   if(chemSelection[13] == 1){
     opacHCN.name = "HCN";
-    opacHCN.T = dvector(0, NTEMP-1);
+    opacHCN.T = dvector(0, NPRESSURE-1);
     opacHCN.P = dvector(0, NPRESSURE-1);
     opacHCN.Plog10 = dvector(0, NPRESSURE-1);
-    opacHCN.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHCN.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacHCN.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacHCN.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacHCN.abundance[j][k] = chem.HCN[j][k];
       }
     }
@@ -589,7 +589,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacHCN.kappa[i][j][k];
     
     printf("Read HCN Opacity done\n");
@@ -600,13 +600,13 @@ void TotalOpac() {
   /* Fill in HF opacities */
   if(chemSelection[14] == 1){
     opacHF.name = "HF";
-    opacHF.T = dvector(0, NTEMP-1);
+    opacHF.T = dvector(0, NPRESSURE-1);
     opacHF.P = dvector(0, NPRESSURE-1);
     opacHF.Plog10 = dvector(0, NPRESSURE-1);
-    opacHF.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHF.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacHF.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacHF.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacHF.abundance[j][k] = chem.HF[j][k];
       }
     }
@@ -615,7 +615,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacHF.kappa[i][j][k];
     
     printf("Read HF Opacity done\n");
@@ -626,13 +626,13 @@ void TotalOpac() {
   /* Fill in MgH opacities */
   if(chemSelection[15] == 1){
     opacMgH.name = "MgH";
-    opacMgH.T = dvector(0, NTEMP-1);
+    opacMgH.T = dvector(0, NPRESSURE-1);
     opacMgH.P = dvector(0, NPRESSURE-1);
     opacMgH.Plog10 = dvector(0, NPRESSURE-1);
-    opacMgH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacMgH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacMgH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacMgH.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacMgH.abundance[j][k] = chem.MgH[j][k];
       }
     }
@@ -641,7 +641,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacMgH.kappa[i][j][k];
     
     printf("Read MgH Opacity done\n");
@@ -652,13 +652,13 @@ void TotalOpac() {
   /* Fill in N2 opacities */
   if(chemSelection[16] == 1){
     opacN2.name = "N2";
-    opacN2.T = dvector(0, NTEMP-1);
+    opacN2.T = dvector(0, NPRESSURE-1);
     opacN2.P = dvector(0, NPRESSURE-1);
     opacN2.Plog10 = dvector(0, NPRESSURE-1);
-    opacN2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacN2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacN2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacN2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacN2.abundance[j][k] = chem.N2[j][k];
       }
     }
@@ -667,7 +667,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacN2.kappa[i][j][k];
     
     printf("Read N2 Opacity done\n");
@@ -678,13 +678,13 @@ void TotalOpac() {
   /* Fill in NO opacities */
   if(chemSelection[17] == 1){
     opacNO.name = "NO";
-    opacNO.T = dvector(0, NTEMP-1);
+    opacNO.T = dvector(0, NPRESSURE-1);
     opacNO.P = dvector(0, NPRESSURE-1);
     opacNO.Plog10 = dvector(0, NPRESSURE-1);
-    opacNO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacNO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacNO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacNO.abundance[j][k] = chem.NO[j][k];
       }
     }
@@ -693,7 +693,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacNO.kappa[i][j][k];
     
     printf("Read NO Opacity done\n");
@@ -704,13 +704,13 @@ void TotalOpac() {
   /* Fill in NO2 opacities */
   if(chemSelection[18] == 1){
     opacNO2.name = "NO2";
-    opacNO2.T = dvector(0, NTEMP-1);
+    opacNO2.T = dvector(0, NPRESSURE-1);
     opacNO2.P = dvector(0, NPRESSURE-1);
     opacNO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacNO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacNO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacNO2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacNO2.abundance[j][k] = chem.NO2[j][k];
       }
     }
@@ -719,7 +719,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacNO2.kappa[i][j][k];
     
     printf("Read NO2 Opacity done\n");
@@ -730,13 +730,13 @@ void TotalOpac() {
   /* Fill in OCS opacities */
   if(chemSelection[19] == 1){
     opacOCS.name = "OCS";
-    opacOCS.T = dvector(0, NTEMP-1);
+    opacOCS.T = dvector(0, NPRESSURE-1);
     opacOCS.P = dvector(0, NPRESSURE-1);
     opacOCS.Plog10 = dvector(0, NPRESSURE-1);
-    opacOCS.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacOCS.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacOCS.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacOCS.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacOCS.abundance[j][k] = chem.OCS[j][k];
       }
     }
@@ -745,7 +745,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacOCS.kappa[i][j][k];
     
     printf("Read OCS Opacity done\n");
@@ -756,13 +756,13 @@ void TotalOpac() {
   /* Fill in OH opacities */
   if(chemSelection[20] == 1){
     opacOH.name = "OH";
-    opacOH.T = dvector(0, NTEMP-1);
+    opacOH.T = dvector(0, NPRESSURE-1);
     opacOH.P = dvector(0, NPRESSURE-1);
     opacOH.Plog10 = dvector(0, NPRESSURE-1);
-    opacOH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacOH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacOH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacOH.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacOH.abundance[j][k] = chem.OH[j][k];
       }
     }
@@ -771,7 +771,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacOH.kappa[i][j][k];
     
     printf("Read OH Opacity done\n");
@@ -782,13 +782,13 @@ void TotalOpac() {
   /* Fill in PH3 opacities */
   if(chemSelection[21] == 1){
     opacPH3.name = "PH3";
-    opacPH3.T = dvector(0, NTEMP-1);
+    opacPH3.T = dvector(0, NPRESSURE-1);
     opacPH3.P = dvector(0, NPRESSURE-1);
     opacPH3.Plog10 = dvector(0, NPRESSURE-1);
-    opacPH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacPH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacPH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacPH3.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacPH3.abundance[j][k] = chem.PH3[j][k];
       }
     }
@@ -797,7 +797,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacPH3.kappa[i][j][k];
     
     printf("Read PH3 Opacity done\n");
@@ -808,13 +808,13 @@ void TotalOpac() {
   /* Fill in SH opacities */
   if(chemSelection[22] == 1){
     opacSH.name = "SH";
-    opacSH.T = dvector(0, NTEMP-1);
+    opacSH.T = dvector(0, NPRESSURE-1);
     opacSH.P = dvector(0, NPRESSURE-1);
     opacSH.Plog10 = dvector(0, NPRESSURE-1);
-    opacSH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacSH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacSH.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacSH.abundance[j][k] = chem.SH[j][k];
       }
     }
@@ -823,7 +823,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacSH.kappa[i][j][k];
     
     printf("Read SH Opacity done\n");
@@ -834,13 +834,13 @@ void TotalOpac() {
   /* Fill in SiH opacities */
   if(chemSelection[23] == 1){
     opacSiH.name = "SiH";
-    opacSiH.T = dvector(0, NTEMP-1);
+    opacSiH.T = dvector(0, NPRESSURE-1);
     opacSiH.P = dvector(0, NPRESSURE-1);
     opacSiH.Plog10 = dvector(0, NPRESSURE-1);
-    opacSiH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSiH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacSiH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacSiH.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacSiH.abundance[j][k] = chem.SiH[j][k];
       }
     }
@@ -849,7 +849,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacSiH.kappa[i][j][k];
     
     printf("Read SiH Opacity done\n");
@@ -860,13 +860,13 @@ void TotalOpac() {
   /* Fill in SiO opacities */
   if(chemSelection[24] == 1){
     opacSiO.name = "SiO";
-    opacSiO.T = dvector(0, NTEMP-1);
+    opacSiO.T = dvector(0, NPRESSURE-1);
     opacSiO.P = dvector(0, NPRESSURE-1);
     opacSiO.Plog10 = dvector(0, NPRESSURE-1);
-    opacSiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacSiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacSiO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacSiO.abundance[j][k] = chem.SiO[j][k];
       }
     }
@@ -875,7 +875,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacSiO.kappa[i][j][k];
     
     printf("Read SiO Opacity done\n");
@@ -886,13 +886,13 @@ void TotalOpac() {
   /* Fill in SO2 opacities */
   if(chemSelection[25] == 1){
     opacSO2.name = "SO2";
-    opacSO2.T = dvector(0, NTEMP-1);
+    opacSO2.T = dvector(0, NPRESSURE-1);
     opacSO2.P = dvector(0, NPRESSURE-1);
     opacSO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacSO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacSO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacSO2.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacSO2.abundance[j][k] = chem.SO2[j][k];
       }
     }
@@ -901,7 +901,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacSO2.kappa[i][j][k];
     
     printf("Read SO2 Opacity done\n");
@@ -912,13 +912,13 @@ void TotalOpac() {
   /* Fill in TiO opacities */
   if(chemSelection[26] == 1){
     opacTiO.name = "TiO";
-    opacTiO.T = dvector(0, NTEMP-1);
+    opacTiO.T = dvector(0, NPRESSURE-1);
     opacTiO.P = dvector(0, NPRESSURE-1);
     opacTiO.Plog10 = dvector(0, NPRESSURE-1);
-    opacTiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacTiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacTiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacTiO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacTiO.abundance[j][k] = chem.TiO[j][k];
       }
     }
@@ -927,7 +927,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacTiO.kappa[i][j][k];
     
     printf("Read TiO Opacity done\n");
@@ -938,13 +938,13 @@ void TotalOpac() {
   /* Fill in VO opacities */
   if(chemSelection[27] == 1){
     opacVO.name = "VO";
-    opacVO.T = dvector(0, NTEMP-1);
+    opacVO.T = dvector(0, NPRESSURE-1);
     opacVO.P = dvector(0, NPRESSURE-1);
     opacVO.Plog10 = dvector(0, NPRESSURE-1);
-    opacVO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacVO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacVO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacVO.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
 	opacVO.abundance[j][k] = chem.VO[j][k];
       }
     }
@@ -953,7 +953,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opac.kappa[i][j][k] += opacVO.kappa[i][j][k];
     
     printf("Read VO Opacity done\n");
@@ -966,13 +966,13 @@ void TotalOpac() {
   /* Fill in Na opacities */
   if(chemSelection[28] == 1){
     opacNa.name = "Na";
-    opacNa.T = dvector(0, NTEMP-1);
+    opacNa.T = dvector(0, NPRESSURE-1);
     opacNa.P = dvector(0, NPRESSURE-1);
     opacNa.Plog10 = dvector(0, NPRESSURE-1);
-    opacNa.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNa.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacNa.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacNa.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
   	opacNa.abundance[j][k] = chem.Na[j][k];
       }
     }
@@ -981,7 +981,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-  	for (k=0; k<NTEMP; k++)
+  	for (k=0; k<NPRESSURE; k++)
   	  opac.kappa[i][j][k] += opacNa.kappa[i][j][k];
     
     printf("Read Na Opacity done\n");
@@ -992,13 +992,13 @@ void TotalOpac() {
   /* Fill in K opacities */
   if(chemSelection[29] == 1){
     opacK.name = "K";
-    opacK.T = dvector(0, NTEMP-1);
+    opacK.T = dvector(0, NPRESSURE-1);
     opacK.P = dvector(0, NPRESSURE-1);
     opacK.Plog10 = dvector(0, NPRESSURE-1);
-    opacK.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacK.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacK.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacK.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     for(j=0; j<NPRESSURE; j++){
-      for(k=0; k<NTEMP; k++){
+      for(k=0; k<NPRESSURE; k++){
   	opacK.abundance[j][k] = chem.K[j][k];
       }
     }
@@ -1007,7 +1007,7 @@ void TotalOpac() {
     //Populate opac.kappa
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-  	for (k=0; k<NTEMP; k++)
+  	for (k=0; k<NPRESSURE; k++)
   	  opac.kappa[i][j][k] += opacK.kappa[i][j][k];
     
     printf("Read K Opacity done\n");
@@ -1017,7 +1017,7 @@ void TotalOpac() {
   
   /* Fill in total opacities */
   
-  for(k=0; k<NTEMP; k++)
+  for(k=0; k<NPRESSURE; k++)
     opac.T[k] = chem.T[k];	      //insert temperatures
   
   for(j=0; j<NPRESSURE; j++){	      //insert pressues
@@ -1031,16 +1031,16 @@ void TotalOpac() {
     
     /* Allocate collison induced opacities */
     opacCIA.name = "CIA";
-    opacCIA.T = dvector(0, NTEMP-1);
+    opacCIA.T = dvector(0, NPRESSURE-1);
     opacCIA.P = dvector(0, NPRESSURE-1);
     opacCIA.Plog10 = dvector(0, NPRESSURE-1);
-    opacCIA.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacCIA.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacCIA.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacCIA.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     
     /* populate with zeros */	
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opacCIA.kappa[i][j][k] = 0.;
     
     /* Read in CIA opacities */
@@ -1051,10 +1051,10 @@ void TotalOpac() {
       exit(1);
     }
     
-    for(i=0; i<NTEMP; i++){
+    for(i=0; i<NPRESSURE; i++){
       fscanf(f1, "%le", &opacCIA.T[i]);
     }
-    for (k=0; k<NTEMP; k++){
+    for (k=0; k<NPRESSURE; k++){
       fscanf(f1, "%le", &opacCIA.T[k]);
       for (i=0; i<NLAMBDA; i++){
 	fscanf(f1, "%le %le %le %le %le %le %le %le %le %le %le %le %le %le %le", &atmos.lambda[i], &opac_CIA_H2H2[k][i], &opac_CIA_H2He[k][i], &opac_CIA_H2H[k][i], &opac_CIA_H2CH4[k][i], &opac_CIA_CH4Ar[k][i], &opac_CIA_CH4CH4[k][i], &opac_CIA_CO2CO2[k][i], &opac_CIA_HeH[k][i], &opac_CIA_N2CH4[k][i], &opac_CIA_N2H2[k][i], &opac_CIA_N2N2[k][i], &opac_CIA_O2CO2[k][i], &opac_CIA_O2N2[k][i], &opac_CIA_O2O2[k][i]);
@@ -1063,7 +1063,7 @@ void TotalOpac() {
 
     for (i=0; i<NLAMBDA; i++){
       for (j=0; j<NPRESSURE; j++){
-	for (k=0; k<NTEMP; k++){
+	for (k=0; k<NPRESSURE; k++){
 	  opacCIA.kappa[i][j][k] += opac_CIA_H2H2[k][i] * 
 	    chem.H2[j][k] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
 	    chem.H2[j][k] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
@@ -1112,7 +1112,7 @@ void TotalOpac() {
 	      
     for(i = 0; i < NLAMBDA; i++)
       for(j = 0; j < NPRESSURE; j++)
-  	for(k = 0; k < NTEMP; k++)
+  	for(k = 0; k < NPRESSURE; k++)
   	  opac.kappa[i][j][k] += opacCIA.kappa[i][j][k]; //Add to overall kappa
     
     FreeOpacTable(opacCIA);
@@ -1127,22 +1127,22 @@ void TotalOpac() {
     /* Declare memory for opacscat structure */
     
     opacscat.name = "Scat";
-    opacscat.T = dvector(0, NTEMP-1);
+    opacscat.T = dvector(0, NPRESSURE-1);
     opacscat.P = dvector(0, NPRESSURE-1);
     opacscat.Plog10 = dvector(0, NPRESSURE-1);
-    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacscat.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
+    opacscat.abundance = dmatrix(0, NPRESSURE-1, 0, NPRESSURE-1);
     
     //populate with zeros	
     for (i=0; i<NLAMBDA; i++)
       for (j=0; j<NPRESSURE; j++)
-	for (k=0; k<NTEMP; k++)
+	for (k=0; k<NPRESSURE; k++)
 	  opacscat.kappa[i][j][k] = 0.;
     
     /* Fill in scattering coefficients */
     for (i=0; i<NLAMBDA; i++) {
       for (j=0; j<NPRESSURE; j++) {
-	for (k=0; k<NTEMP; k++) {
+	for (k=0; k<NPRESSURE; k++) {
 	  /* Add Rayleigh scattering polarizability to overall kappa */
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
@@ -1236,20 +1236,20 @@ void TotalOpac() {
 
   /*  Free memory */
 
-  free_dmatrix(opac_CIA_H2H2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_H2He, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_H2H, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_H2CH4, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_CH4Ar, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_CH4CH4, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_CO2CO2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_HeH, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_N2CH4, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_N2H2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_N2N2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_O2CO2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_O2N2, 0, NTEMP-1, 0, NLAMBDA-1);
-  free_dmatrix(opac_CIA_O2O2, 0, NTEMP-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_H2H2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_H2He, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_H2H, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_H2CH4, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_CH4Ar, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_CH4CH4, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_CO2CO2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_HeH, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_N2CH4, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_N2H2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_N2N2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_O2CO2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_O2N2, 0, NPRESSURE-1, 0, NLAMBDA-1);
+  free_dmatrix(opac_CIA_O2O2, 0, NPRESSURE-1, 0, NLAMBDA-1);
   
 }
 

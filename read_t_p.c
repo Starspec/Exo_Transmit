@@ -73,7 +73,9 @@ void ReadTP()
     exit(1);
   }
   
-  /* Read in T-P profile */
+  /* Read in T-P profile
+   * With Teal's update, this is going to be the same file that is read in
+   * with the vertical chemical profiles. No point in having two files. */
 
   fscanf(file, "%s %s %s", dum, dum, dum);
   for (i=0; i<NTAU; i++){
