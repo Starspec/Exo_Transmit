@@ -81,18 +81,16 @@ void ReadOpacTable(struct Opac opac, char *filename) {
     for (j=0; j<opac.NP; j++) {
       fscanf(f1,"%le", &junk);
 	  	  
-      for (k=0; k<opac.NT; k++) {
-		  fscanf(f1,"%le", &opac.kappa[i][j][k]);
+	fscanf(f1,"%le", &opac.kappa[i][j]);
 	
 	/*   kappa in file is actually cross section, sigma.  
 	     Need to multiply by number density */
 	
-	opac.kappa[i][j][k] *= opac.abundance[j][k] * opac.P[j] /
+	opac.kappa[i][j][k] *= opac.abundance[j] * opac.P[j] /
 	  (KBOLTZMANN * opac.T[k]);
 	
       }
     }
-  }
   
   fclose(f1);
   printf("opac %e %e %e\n", atmos.lambda[NLAMBDA-1], opac.P[0], opac.T[0]);
@@ -114,7 +112,7 @@ void FreeOpacTable(struct Opac opac)
   free_dvector(opac.T, 0, NTEMP-1);
   free_dvector(opac.P, 0, NPRESSURE-1);
   free_dvector(opac.Plog10, 0, NPRESSURE-1);
-  free_dmatrix(opac.abundance, 0, NPRESSURE-1, 0, NTEMP-1);
+  free_dvector(opac.abundance, 0, NPRESSURE-1);
   free_d3tensor(opac.kappa, 0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
 
 }

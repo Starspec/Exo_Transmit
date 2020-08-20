@@ -42,11 +42,11 @@ struct Chem chem;
 
 int main()
 {
-  TotalOpac();
-  printf("TotalOpac done\n");
-
   ReadTP();
   printf("ReadTP done\n");
+
+  TotalOpac();
+  printf("TotalOpac done\n");
 
   RT_Transmit();
   printf("Exo_Transmit done\n");

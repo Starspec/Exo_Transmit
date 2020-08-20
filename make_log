@@ -1,0 +1,1067 @@
+cc -Wall -g -c main_transmission.c 
+cc -Wall -g -c  readopactable.c 
+cc -Wall -g -c  totalopac.c 
+totalopac.c: In function ‘TotalOpac’:
+totalopac.c:102:7: warning: unused variable ‘NTEMP’ [-Wunused-variable]
+   int NTEMP = variables.NTEMP;
+       ^
+cc -Wall -g -c readchemtable.c 
+readchemtable.c: In function ‘ReadChemTable’:
+readchemtable.c:63:14: warning: assignment from incompatible pointer type [enabled by default]
+   chem.total = dvector(0, NPRESSURE-1);
+              ^
+readchemtable.c:64:10: warning: assignment from incompatible pointer type [enabled by default]
+   chem.C = dvector(0, NPRESSURE-1); 
+          ^
+readchemtable.c:65:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.CH4 = dvector(0, NPRESSURE-1);
+            ^
+readchemtable.c:66:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.CO = dvector(0, NPRESSURE-1);
+           ^
+readchemtable.c:67:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.CO2 = dvector(0, NPRESSURE-1);
+            ^
+readchemtable.c:68:13: warning: assignment from incompatible pointer type [enabled by default]
+   chem.C2H2 = dvector(0, NPRESSURE-1);
+             ^
+readchemtable.c:69:13: warning: assignment from incompatible pointer type [enabled by default]
+   chem.C2H4 = dvector(0, NPRESSURE-1); 
+             ^
+readchemtable.c:70:13: warning: assignment from incompatible pointer type [enabled by default]
+   chem.C2H6 = dvector(0, NPRESSURE-1);  
+             ^
+readchemtable.c:71:10: warning: assignment from incompatible pointer type [enabled by default]
+   chem.H = dvector(0, NPRESSURE-1); 
+          ^
+readchemtable.c:72:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.HCN = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:73:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.HCl = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:74:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.HF = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:75:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.H2 = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:76:13: warning: assignment from incompatible pointer type [enabled by default]
+   chem.H2CO = dvector(0, NPRESSURE-1); 
+             ^
+readchemtable.c:77:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.H2O = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:78:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.H2S = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:79:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.He = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:80:10: warning: assignment from incompatible pointer type [enabled by default]
+   chem.K = dvector(0, NPRESSURE-1);
+          ^
+readchemtable.c:81:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.MgH = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:82:10: warning: assignment from incompatible pointer type [enabled by default]
+   chem.N = dvector(0, NPRESSURE-1); 
+          ^
+readchemtable.c:83:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.N2 = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:84:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.NO2 = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:85:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.NH3 = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:86:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.NO = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:87:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.Na = dvector(0, NPRESSURE-1);
+           ^
+readchemtable.c:88:10: warning: assignment from incompatible pointer type [enabled by default]
+   chem.O = dvector(0, NPRESSURE-1); 
+          ^
+readchemtable.c:89:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.O2 = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:90:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.O3 = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:91:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.OCS = dvector(0, NPRESSURE-1);  
+            ^
+readchemtable.c:92:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.OH = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:93:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.PH3 = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:94:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.SH = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:95:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.SO2 = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:96:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.SiH = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:97:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.SiO = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:98:12: warning: assignment from incompatible pointer type [enabled by default]
+   chem.TiO = dvector(0, NPRESSURE-1); 
+            ^
+readchemtable.c:99:11: warning: assignment from incompatible pointer type [enabled by default]
+   chem.VO = dvector(0, NPRESSURE-1); 
+           ^
+readchemtable.c:115:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.T); 
+        ^
+readchemtable.c:116:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.total[i]);
+        ^
+readchemtable.c:117:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C[i]);
+        ^
+readchemtable.c:118:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CH4[i]); 
+        ^
+readchemtable.c:121:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[0], chem.CH4[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:122:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CO[i]);  
+        ^
+readchemtable.c:123:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[2], chem.CO[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:124:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.OCS[i]); 
+        ^
+readchemtable.c:125:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[19], chem.OCS[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:126:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CO2[i]); 
+        ^
+readchemtable.c:127:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[1], chem.CO2[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:128:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H2[i]); 
+        ^
+readchemtable.c:129:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[7], chem.C2H2[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:130:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H4[i]); 
+        ^
+readchemtable.c:131:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[8], chem.C2H4[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:132:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H6[i]); 
+        ^
+readchemtable.c:133:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[8], chem.C2H6[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:134:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H[i]);
+        ^
+readchemtable.c:135:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HCN[i]); 
+        ^
+readchemtable.c:136:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[13], chem.HCN[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:137:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HCl[i]); 
+        ^
+readchemtable.c:138:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[12], chem.HCl[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:139:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HF[i]); 
+        ^
+readchemtable.c:140:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[14], chem.HF[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:141:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2[i]);
+        ^
+readchemtable.c:142:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2CO[i]); 
+        ^
+readchemtable.c:143:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[10], chem.H2CO[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:144:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2O[i]); 
+        ^
+readchemtable.c:145:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[3], chem.H2O[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:146:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2S[i]); 
+        ^
+readchemtable.c:147:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[11], chem.H2S[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:148:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.He[i]);
+        ^
+readchemtable.c:149:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.K[i]);
+        ^
+readchemtable.c:150:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.MgH[i]); 
+        ^
+readchemtable.c:151:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[15], chem.MgH[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:152:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.N[i]);
+        ^
+readchemtable.c:153:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.N2[i]); 
+        ^
+readchemtable.c:154:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[16], chem.N2[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:155:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NO2[i]); 
+        ^
+readchemtable.c:156:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[18], chem.NO2[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:157:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NH3[i]); 
+        ^
+readchemtable.c:158:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[4], chem.NH3[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:159:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NO[i]); 
+        ^
+readchemtable.c:160:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[17], chem.NO[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:161:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.Na[i]); 
+        ^
+readchemtable.c:162:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O[i]);
+        ^
+readchemtable.c:163:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O2[i]); 
+        ^
+readchemtable.c:164:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[5], chem.O2[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:165:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O3[i]); 
+        ^
+readchemtable.c:166:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[5], chem.O3[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:167:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.OH[i]); 
+        ^
+readchemtable.c:168:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[20], chem.OH[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:169:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.PH3[i]); 
+        ^
+readchemtable.c:170:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[21], chem.PH3[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:171:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SH[i]); 
+        ^
+readchemtable.c:172:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[22], chem.SH[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:173:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SO2[i]); 
+        ^
+readchemtable.c:174:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[25], chem.SO2[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:175:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SiH[i]); 
+        ^
+readchemtable.c:176:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[23], chem.SiH[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:177:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SiO[i]); 
+        ^
+readchemtable.c:178:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[24], chem.SiO[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:179:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.TiO[i]); 
+        ^
+readchemtable.c:180:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[26], chem.TiO[i]); 
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:181:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.VO[i]); 
+        ^
+readchemtable.c:182:8: error: incompatible type for argument 2 of ‘errorCheck’
+        errorCheck(chemSelection[27], chem.VO[i]);
+        ^
+In file included from readchemtable.c:29:0:
+prototypes.h:45:6: note: expected ‘double’ but argument is of type ‘double *’
+ void errorCheck(int onOff, double value);
+      ^
+readchemtable.c:185:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.T); 
+        ^
+readchemtable.c:186:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.total[i]);
+        ^
+readchemtable.c:187:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C[i]);
+        ^
+readchemtable.c:188:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CH4[i]); 
+        ^
+readchemtable.c:189:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CO[i]); 
+        ^
+readchemtable.c:190:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.OCS[i]); 
+        ^
+readchemtable.c:191:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.CO2[i]); 
+        ^
+readchemtable.c:192:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H2[i]); 
+        ^
+readchemtable.c:193:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H4[i]); 
+        ^
+readchemtable.c:194:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.C2H6[i]); 
+        ^
+readchemtable.c:195:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H[i]);
+        ^
+readchemtable.c:196:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HCN[i]); 
+        ^
+readchemtable.c:197:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HCl[i]); 
+        ^
+readchemtable.c:198:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.HF[i]); 
+        ^
+readchemtable.c:199:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2[i]);
+        ^
+readchemtable.c:200:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2CO[i]); 
+        ^
+readchemtable.c:201:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2O[i]); 
+        ^
+readchemtable.c:202:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.H2S[i]); 
+        ^
+readchemtable.c:203:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.He[i]);
+        ^
+readchemtable.c:204:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.K[i]);
+        ^
+readchemtable.c:205:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.MgH[i]); 
+        ^
+readchemtable.c:206:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.N[i]);
+        ^
+readchemtable.c:207:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.N2[i]); 
+        ^
+readchemtable.c:208:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NO2[i]); 
+        ^
+readchemtable.c:209:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NH3[i]); 
+        ^
+readchemtable.c:210:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.NO[i]); 
+        ^
+readchemtable.c:211:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.Na[i]); 
+        ^
+readchemtable.c:212:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O[i]);
+        ^
+readchemtable.c:213:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O2[i]); 
+        ^
+readchemtable.c:214:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.O3[i]); 
+        ^
+readchemtable.c:215:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.OH[i]); 
+        ^
+readchemtable.c:216:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.PH3[i]); 
+        ^
+readchemtable.c:217:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SH[i]); 
+        ^
+readchemtable.c:218:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SO2[i]); 
+        ^
+readchemtable.c:219:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SiH[i]); 
+        ^
+readchemtable.c:220:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.SiO[i]); 
+        ^
+readchemtable.c:221:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.TiO[i]); 
+        ^
+readchemtable.c:222:8: warning: format ‘%le’ expects argument of type ‘double *’, but argument 3 has type ‘double **’ [-Wformat=]
+        fscanf(f1,"%le", &chem.VO[i]); 
+        ^
+readchemtable.c:43:10: warning: unused variable ‘j’ [-Wunused-variable]
+   int i, j;
+          ^
+readchemtable.c: At top level:
+readchemtable.c:227:9: warning: data definition has no type or storage class [enabled by default]
+         fclose(f1);
+         ^
+readchemtable.c:227:9: warning: type defaults to ‘int’ in declaration of ‘fclose’ [-Wimplicit-int]
+readchemtable.c:227:9: warning: parameter names (without types) in function declaration [enabled by default]
+readchemtable.c:230:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("Chemistry: \n"); 
+                ^
+readchemtable.c:231:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("P_0\t%e \n", chem.P[NPRESSURE-1]);
+                ^
+readchemtable.c:231:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("P_0\t%e \n", chem.P[NPRESSURE-1]);
+                              ^
+readchemtable.c:232:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("T_0\t%e \n", chem.T[NPRESSURE-1]);
+                ^
+readchemtable.c:232:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("T_0\t%e \n", chem.T[NPRESSURE-1]);
+                              ^
+readchemtable.c:233:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("total\t%e \n", chem.total[0]);
+                ^
+readchemtable.c:233:32: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("total\t%e \n", chem.total[0]);
+                                ^
+readchemtable.c:234:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("C\t%e \n", chem.C[0]);
+                ^
+readchemtable.c:234:28: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("C\t%e \n", chem.C[0]);
+                            ^
+readchemtable.c:235:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("CH4\t%e \n", chem.CH4[0]);
+                ^
+readchemtable.c:235:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("CH4\t%e \n", chem.CH4[0]);
+                              ^
+readchemtable.c:236:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("CO\t%e \n", chem.CO[0]);
+                ^
+readchemtable.c:236:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("CO\t%e \n", chem.CO[0]);
+                             ^
+readchemtable.c:237:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("CO2\t%e \n", chem.CO2[0]);
+                ^
+readchemtable.c:237:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("CO2\t%e \n", chem.CO2[0]);
+                              ^
+readchemtable.c:238:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("C2H2\t%e \n", chem.C2H2[0]);
+                ^
+readchemtable.c:238:31: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("C2H2\t%e \n", chem.C2H2[0]);
+                               ^
+readchemtable.c:239:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("C2H4\t%e \n", chem.C2H4[0]);
+                ^
+readchemtable.c:239:31: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("C2H4\t%e \n", chem.C2H4[0]);
+                               ^
+readchemtable.c:240:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("H\t%e \n", chem.H[0]);
+                ^
+readchemtable.c:240:28: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("H\t%e \n", chem.H[0]);
+                            ^
+readchemtable.c:241:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("HCN\t%e \n", chem.HCN[0]);
+                ^
+readchemtable.c:241:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("HCN\t%e \n", chem.HCN[0]);
+                              ^
+readchemtable.c:242:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("HCl\t%e \n", chem.HCl[0]);
+                ^
+readchemtable.c:242:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("HCl\t%e \n", chem.HCl[0]);
+                              ^
+readchemtable.c:243:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("HF\t%e \n", chem.HF[0]);
+                ^
+readchemtable.c:243:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("HF\t%e \n", chem.HF[0]);
+                             ^
+readchemtable.c:244:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("H2\t%e \n", chem.H2[0]);
+                ^
+readchemtable.c:244:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("H2\t%e \n", chem.H2[0]);
+                             ^
+readchemtable.c:245:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("H2CO\t%e \n", chem.H2CO[0]);
+                ^
+readchemtable.c:245:31: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("H2CO\t%e \n", chem.H2CO[0]);
+                               ^
+readchemtable.c:246:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("H2O\t%e \n", chem.H2O[0]);
+                ^
+readchemtable.c:246:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("H2O\t%e \n", chem.H2O[0]);
+                              ^
+readchemtable.c:247:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("H2S\t%e \n", chem.H2S[0]);
+                ^
+readchemtable.c:247:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("H2S\t%e \n", chem.H2S[0]);
+                              ^
+readchemtable.c:248:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("He\t%e \n", chem.He[0]);
+                ^
+readchemtable.c:248:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("He\t%e \n", chem.He[0]);
+                             ^
+readchemtable.c:249:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("MgH\t%e \n", chem.MgH[0]);
+                ^
+readchemtable.c:249:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("MgH\t%e \n", chem.MgH[0]);
+                              ^
+readchemtable.c:250:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("N\t%e \n", chem.N[0]);
+                ^
+readchemtable.c:250:28: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("N\t%e \n", chem.N[0]);
+                            ^
+readchemtable.c:251:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("N2\t%e \n", chem.N2[0]);
+                ^
+readchemtable.c:251:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("N2\t%e \n", chem.N2[0]);
+                             ^
+readchemtable.c:252:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("NO2\t%e \n", chem.NO2[0]);
+                ^
+readchemtable.c:252:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("NO2\t%e \n", chem.NO2[0]);
+                              ^
+readchemtable.c:253:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("NH3\t%e \n", chem.NH3[0]);
+                ^
+readchemtable.c:253:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("NH3\t%e \n", chem.NH3[0]);
+                              ^
+readchemtable.c:254:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("NO\t%e \n", chem.NO[0]);
+                ^
+readchemtable.c:254:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("NO\t%e \n", chem.NO[0]);
+                             ^
+readchemtable.c:255:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("O\t%e \n", chem.O[0]);
+                ^
+readchemtable.c:255:28: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("O\t%e \n", chem.O[0]);
+                            ^
+readchemtable.c:256:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("O2\t%e \n", chem.O2[0]);
+                ^
+readchemtable.c:256:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("O2\t%e \n", chem.O2[0]);
+                             ^
+readchemtable.c:257:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("OCS\t%e \n", chem.OCS[0]);
+                ^
+readchemtable.c:257:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("OCS\t%e \n", chem.OCS[0]);
+                              ^
+readchemtable.c:258:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("OH\t%e \n", chem.OH[0]);
+                ^
+readchemtable.c:258:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("OH\t%e \n", chem.OH[0]);
+                             ^
+readchemtable.c:259:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("PH3\t%e \n", chem.PH3[0]);
+                ^
+readchemtable.c:259:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("PH3\t%e \n", chem.PH3[0]);
+                              ^
+readchemtable.c:260:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("SH\t%e \n", chem.SH[0]);
+                ^
+readchemtable.c:260:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("SH\t%e \n", chem.SH[0]);
+                             ^
+readchemtable.c:261:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("SO2\t%e \n", chem.SO2[0]);
+                ^
+readchemtable.c:261:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("SO2\t%e \n", chem.SO2[0]);
+                              ^
+readchemtable.c:262:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("SiH\t%e \n", chem.SiH[0]);
+                ^
+readchemtable.c:262:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("SiH\t%e \n", chem.SiH[0]);
+                              ^
+readchemtable.c:263:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("SiO\t%e \n", chem.SiO[0]);
+                ^
+readchemtable.c:263:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("SiO\t%e \n", chem.SiO[0]);
+                              ^
+readchemtable.c:264:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("TiO\t%e \n", chem.TiO[0]);
+                ^
+readchemtable.c:264:30: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("TiO\t%e \n", chem.TiO[0]);
+                              ^
+readchemtable.c:265:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("VO\t%e \n", chem.VO[0]);
+                ^
+readchemtable.c:265:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("VO\t%e \n", chem.VO[0]);
+                             ^
+readchemtable.c:266:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("O3\t%e \n", chem.O3[0]);
+                ^
+readchemtable.c:266:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("O3\t%e \n", chem.O3[0]);
+                             ^
+readchemtable.c:267:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("C2H6\t%e \n", chem.C2H6[0]);
+                ^
+readchemtable.c:267:31: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("C2H6\t%e \n", chem.C2H6[0]);
+                               ^
+readchemtable.c:268:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("Na\t%e \n", chem.Na[0]);
+                ^
+readchemtable.c:268:29: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("Na\t%e \n", chem.Na[0]);
+                             ^
+readchemtable.c:269:16: error: expected declaration specifiers or ‘...’ before string constant
+         printf("K\t%e \n", chem.K[0]);
+                ^
+readchemtable.c:269:28: error: expected declaration specifiers or ‘...’ before ‘chem’
+         printf("K\t%e \n", chem.K[0]);
+                            ^
+readchemtable.c:271:3: error: expected identifier or ‘(’ before ‘return’
+   return;
+   ^
+readchemtable.c:272:1: error: expected identifier or ‘(’ before ‘}’ token
+ }
+ ^
+readchemtable.c: In function ‘FreeChemTable’:
+readchemtable.c:287:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.total, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:288:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.C, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:289:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.CH4, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:290:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.CO, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:291:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.CO2, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:292:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.C2H2, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:293:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.C2H4, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:294:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.C2H6, 0, NPRESSURE-1);  
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:295:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.H, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:296:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.HCN, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:297:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.HCl, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:298:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.HF, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:299:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.H2, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:300:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.H2CO, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:301:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.H2O, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:302:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.H2S, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:303:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.He, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:304:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.K, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:305:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.MgH, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:306:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.N, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:307:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.N2, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:308:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.NO2, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:309:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.NH3, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:310:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.NO, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:311:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.Na, 0, NPRESSURE-1);
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:312:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.O, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:313:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.O2, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:314:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.O3, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:315:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.OCS, 0, NPRESSURE-1);  
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:316:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.OH, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:317:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.PH3, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:318:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.SH, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:319:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.SO2, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:320:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.SiH, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:321:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.SiO, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:322:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.TiO, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:323:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.VO, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:324:3: warning: passing argument 1 of ‘free_dvector’ from incompatible pointer type [enabled by default]
+   free_dvector(chem.mu, 0, NPRESSURE-1); 
+   ^
+In file included from readchemtable.c:27:0:
+nrutil.h:24:6: note: expected ‘double *’ but argument is of type ‘double **’
+ void free_dvector(double *v, long nl, long nh);
+      ^
+readchemtable.c:281:7: warning: unused variable ‘NTEMP’ [-Wunused-variable]
+   int NTEMP = variables.NTEMP;
+       ^
+make: *** [readchemtable.o] Error 1

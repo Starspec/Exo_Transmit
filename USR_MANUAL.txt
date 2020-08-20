@@ -209,7 +209,7 @@ getChemSelection.c  -- determines which molecules will be included in the opacit
 		       based on user input
 getFileArray.c	    -- reads in file names specified in the input files
 getNTau.c           -- determines how many layers of the T-P profile lie above a user 
-		       specified cloud deck
+		                   specified cloud deck
 getVars.c           -- reads user inputs from the input files
 interpol.c	    -- interpolation routines           
 main_transmission.c -- main procedure -- calls a sequence of subroutines to obtain the 
