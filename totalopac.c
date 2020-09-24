@@ -172,13 +172,14 @@ void TotalOpac() {
   opac.T = dvector(0, NPRESSURE-1); //Declare T, P, Plog10, and kappa arrays
   opac.P = dvector(0, NPRESSURE-1);
   opac.Plog10 = dvector(0, NPRESSURE-1);
-  opac.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+  opac.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NPRESSURE-1);
   opac.abundance = dvector(0, NPRESSURE-1);
   
   //populate with zeros	
   for (i=0; i<NLAMBDA; i++)
     for (j=0; j<NPRESSURE; j++)
-	opac.kappa[i][j][k] = 0.;
+        for (k=0; k<NPRESSURE; k++)
+	    opac.kappa[i][j][k] = 0.;
   
   /* Fill in mean molecular weight (mu) values */
   

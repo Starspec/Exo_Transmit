@@ -40,7 +40,7 @@ extern struct Chem chem;
 
 void ReadChemTable() {
   
-  int i, j;
+  int i;//, j, k;
   char dum[8];
   int chemSelection[30];
   
@@ -112,7 +112,7 @@ void ReadChemTable() {
   for (i=NPRESSURE-1; i>=0; i--){
     fscanf(f1,"%le", &chem.P[i]);
       if(i == NPRESSURE-1){
-      	fscanf(f1,"%le", &chem.T); 
+      	fscanf(f1,"%le", &chem.T[i]); 
       	fscanf(f1,"%le", &chem.total[i]);
       	fscanf(f1,"%le", &chem.C[i]);
       	fscanf(f1,"%le", &chem.CH4[i]); 
@@ -182,7 +182,7 @@ void ReadChemTable() {
       	errorCheck(chemSelection[27], chem.VO[i]);
             }
             else{
-      	fscanf(f1,"%le", &chem.T); 
+      	fscanf(f1,"%le", &chem.T[i]); 
       	fscanf(f1,"%le", &chem.total[i]);
       	fscanf(f1,"%le", &chem.C[i]);
       	fscanf(f1,"%le", &chem.CH4[i]); 
@@ -222,7 +222,6 @@ void ReadChemTable() {
       	fscanf(f1,"%le", &chem.VO[i]); 
             }
           }
-        }
         
         fclose(f1);
         
@@ -278,7 +277,6 @@ void ReadChemTable() {
 void FreeChemTable(){ 
 
   vars variables = getVars();
-  int NTEMP = variables.NTEMP;
   int NPRESSURE = variables.NPRESSURE;
 
   free_dvector(chem.T, 0, NPRESSURE-1);	
