@@ -49,7 +49,7 @@ void ReadTP()
   /* Get relevant variables */
   char **fileArray = getFileArray();	
   vars variables = getVars();
-  getNTau(&variables, fileArray[0]);
+  getNTau(&variables, fileArray[1]);
   
   /* Rename for convenience */
   int NTEMP = variables.NTEMP; 
@@ -67,26 +67,34 @@ void ReadTP()
   atmos.T = dvector(0, NTAU-1);
   atmos.mu = dvector(0, NTAU-1);
   
-  file = fopen(fileArray[1], "r");						
+  file = fopen(fileArray[0], "r");						
   if(file == NULL){
     printf("\nread_t_p.c:\nError opening file %s: No such file or directory\n\n",
-            fileArray[1]);
+            fileArray[0]);
     exit(1);
-  }
+  };
   
   /* Read in T-P profile
    * With Teal's update, this is going to be the same file that is read in
    * with the vertical chemical profiles. No point in having two files. */
 
-  fscanf(file, "%s %s %s %*s\n", dum, dum, dum);
+  {
+    /* Skip the first line */
+    // This must be longer than the first line, so making it unreasonably long
+    int _line = 1000;
+    char _buffer[_line]; 
+    fgets(_buffer, _line, file);
+    printf("Skipped first line with a buffer.\n");
+  };
+
   for (i=0; i<NTAU; i++){
-    fscanf(file, "%d %le %le %*e\n", &num[i],  &atmos.P[i], &atmos.T[i]);
-    printf("%d %1e %1e\n", num[i],  atmos.P[i], atmos.T[i]);
+    fscanf(file, "%d %le %le", &num[i],  &atmos.P[i], &atmos.T[i]);
   }
+  printf("num: %d psurf: %1e  tsurf:%1e\n", num[0],  atmos.P[0], atmos.T[0]);
   fclose(file);
-  printf("%s\n", fileArray[1]);
-  exit(0);
-  
+  printf("%s\n", fileArray[0]);
+  printf("%d\n", NTAU);
+
   /* Determine mean molecular weight at each altitude */
 //
 //  /* Interpolation variables */
@@ -135,6 +143,8 @@ void ReadTP()
 //    /* linear interpolate */
 //    atmos.mu[i] = lint2D(t1,t2,p1,p2,z1,z2,z3,z4,t,p);
 //  }
+   // Mu is now read in with readchemtable.c, since it is not needed until
+   // after then.
 
   
   /* Cloud layer calculation */

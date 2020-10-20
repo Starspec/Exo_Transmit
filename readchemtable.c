@@ -50,53 +50,54 @@ void ReadChemTable() {
   getChemSelection(chemSelection);
   int NTEMP = variables.NTEMP;
   int NPRESSURE = variables.NPRESSURE;
+  int NTAU = variables.NTAU;
   
-  printf("NTEMP: %d, NPRESSURE: %d\n", NTEMP, NPRESSURE);		
+  printf("NTEMP: %d, NPRESSURE: %d, NTAU: %d\n", NTEMP, NPRESSURE, NTAU);		
   
   FILE *f1;
   
   /* Allocate memory for Chem structure */
   
-  chem.T = dvector(0, NPRESSURE-1);	
-  chem.P = dvector(0, NPRESSURE-1);
+  chem.T = dvector(0, NTAU-1);	
+  chem.P = dvector(0, NTAU-1);
   
-  chem.total = dvector(0, NPRESSURE-1);
-  chem.C = dvector(0, NPRESSURE-1);	
-  chem.CH4 = dvector(0, NPRESSURE-1);
-  chem.CO = dvector(0, NPRESSURE-1);
-  chem.CO2 = dvector(0, NPRESSURE-1);
-  chem.C2H2 = dvector(0, NPRESSURE-1);
-  chem.C2H4 = dvector(0, NPRESSURE-1);	
-  chem.C2H6 = dvector(0, NPRESSURE-1);		
-  chem.H = dvector(0, NPRESSURE-1);	
-  chem.HCN = dvector(0, NPRESSURE-1);	
-  chem.HCl = dvector(0, NPRESSURE-1);	
-  chem.HF = dvector(0, NPRESSURE-1);	
-  chem.H2 = dvector(0, NPRESSURE-1);	
-  chem.H2CO = dvector(0, NPRESSURE-1);	
-  chem.H2O = dvector(0, NPRESSURE-1);	
-  chem.H2S = dvector(0, NPRESSURE-1);	
-  chem.He = dvector(0, NPRESSURE-1);	
-  chem.K = dvector(0, NPRESSURE-1);
-  chem.MgH = dvector(0, NPRESSURE-1);	
-  chem.N = dvector(0, NPRESSURE-1);	
-  chem.N2 = dvector(0, NPRESSURE-1);	
-  chem.NO2 = dvector(0, NPRESSURE-1);	
-  chem.NH3 = dvector(0, NPRESSURE-1);	
-  chem.NO = dvector(0, NPRESSURE-1);	
-  chem.Na = dvector(0, NPRESSURE-1);
-  chem.O = dvector(0, NPRESSURE-1);	
-  chem.O2 = dvector(0, NPRESSURE-1);	
-  chem.O3 = dvector(0, NPRESSURE-1);	
-  chem.OCS = dvector(0, NPRESSURE-1); 	
-  chem.OH = dvector(0, NPRESSURE-1);	
-  chem.PH3 = dvector(0, NPRESSURE-1);	
-  chem.SH = dvector(0, NPRESSURE-1);	
-  chem.SO2 = dvector(0, NPRESSURE-1);	
-  chem.SiH = dvector(0, NPRESSURE-1);	
-  chem.SiO = dvector(0, NPRESSURE-1);	
-  chem.TiO = dvector(0, NPRESSURE-1);	
-  chem.VO = dvector(0, NPRESSURE-1);	
+  chem.total = dvector(0, NTAU-1);
+  chem.C = dvector(0, NTAU-1);	
+  chem.CH4 = dvector(0, NTAU-1);
+  chem.CO = dvector(0, NTAU-1);
+  chem.CO2 = dvector(0, NTAU-1);
+  chem.C2H2 = dvector(0, NTAU-1);
+  chem.C2H4 = dvector(0, NTAU-1);	
+  chem.C2H6 = dvector(0, NTAU-1);		
+  chem.H = dvector(0, NTAU-1);	
+  chem.HCN = dvector(0, NTAU-1);	
+  chem.HCl = dvector(0, NTAU-1);	
+  chem.HF = dvector(0, NTAU-1);	
+  chem.H2 = dvector(0, NTAU-1);	
+  chem.H2CO = dvector(0, NTAU-1);	
+  chem.H2O = dvector(0, NTAU-1);	
+  chem.H2S = dvector(0, NTAU-1);	
+  chem.He = dvector(0, NTAU-1);	
+  chem.K = dvector(0, NTAU-1);
+  chem.MgH = dvector(0, NTAU-1);	
+  chem.N = dvector(0, NTAU-1);	
+  chem.N2 = dvector(0, NTAU-1);	
+  chem.NO2 = dvector(0, NTAU-1);	
+  chem.NH3 = dvector(0, NTAU-1);	
+  chem.NO = dvector(0, NTAU-1);	
+  chem.Na = dvector(0, NTAU-1);
+  chem.O = dvector(0, NTAU-1);	
+  chem.O2 = dvector(0, NTAU-1);	
+  chem.O3 = dvector(0, NTAU-1);	
+  chem.OCS = dvector(0, NTAU-1); 	
+  chem.OH = dvector(0, NTAU-1);	
+  chem.PH3 = dvector(0, NTAU-1);	
+  chem.SH = dvector(0, NTAU-1);	
+  chem.SO2 = dvector(0, NTAU-1);	
+  chem.SiH = dvector(0, NTAU-1);	
+  chem.SiO = dvector(0, NTAU-1);	
+  chem.TiO = dvector(0, NTAU-1);	
+  chem.VO = dvector(0, NTAU-1);	
   
   /* Read in chemistry abundances */	
   
@@ -106,12 +107,18 @@ void ReadChemTable() {
     exit(1);
   }
   
-  for (i=0; i<38; i++)
-    fscanf(f1,"%s", dum);
+  {
+    /* Skip the first line */
+    // This must be longer than the first line, so making it unreasonably long
+    int _line = 1000;
+    char _buffer[_line]; 
+    fgets(_buffer, _line, f1);
+    printf("Skipped first line with a buffer.\n");
+  };
   
-  for (i=NPRESSURE-1; i>=0; i--){
+  for (i=NTAU-1; i>=0; i--){
     fscanf(f1,"%le", &chem.P[i]);
-      if(i == NPRESSURE-1){
+      if(i == NTAU-1){
       	fscanf(f1,"%le", &chem.T[i]); 
       	fscanf(f1,"%le", &chem.total[i]);
       	fscanf(f1,"%le", &chem.C[i]);
@@ -227,8 +234,8 @@ void ReadChemTable() {
         
         /* Print out final line of data as a double-check */
         printf("Chemistry: \n");	
-        printf("P_0\t%e \n", chem.P[NPRESSURE-1]);
-        printf("T_0\t%e \n", chem.T[NPRESSURE-1]);
+        printf("P_0\t%e \n", chem.P[NTAU-1]);
+        printf("T_0\t%e \n", chem.T[NTAU-1]);
         printf("total\t%e \n", chem.total[0]);
         printf("C\t%e \n", chem.C[0]);
         printf("CH4\t%e \n", chem.CH4[0]);
@@ -278,48 +285,50 @@ void FreeChemTable(){
 
   vars variables = getVars();
   int NPRESSURE = variables.NPRESSURE;
+  int NTEMP = variables.NTEMP;
+  int NTAU = variables.NTAU;
 
-  free_dvector(chem.T, 0, NPRESSURE-1);	
-  free_dvector(chem.P, 0, NPRESSURE-1);
+  free_dvector(chem.T, 0, NTAU-1);	
+  free_dvector(chem.P, 0, NTAU-1);
   
-  free_dvector(chem.total, 0, NPRESSURE-1);
-  free_dvector(chem.C, 0, NPRESSURE-1);	
-  free_dvector(chem.CH4, 0, NPRESSURE-1);
-  free_dvector(chem.CO, 0, NPRESSURE-1);
-  free_dvector(chem.CO2, 0, NPRESSURE-1);
-  free_dvector(chem.C2H2, 0, NPRESSURE-1);
-  free_dvector(chem.C2H4, 0, NPRESSURE-1);	
-  free_dvector(chem.C2H6, 0, NPRESSURE-1);		
-  free_dvector(chem.H, 0, NPRESSURE-1);	
-  free_dvector(chem.HCN, 0, NPRESSURE-1);	
-  free_dvector(chem.HCl, 0, NPRESSURE-1);	
-  free_dvector(chem.HF, 0, NPRESSURE-1);	
-  free_dvector(chem.H2, 0, NPRESSURE-1);	
-  free_dvector(chem.H2CO, 0, NPRESSURE-1);	
-  free_dvector(chem.H2O, 0, NPRESSURE-1);	
-  free_dvector(chem.H2S, 0, NPRESSURE-1);	
-  free_dvector(chem.He, 0, NPRESSURE-1);	
-  free_dvector(chem.K, 0, NPRESSURE-1);
-  free_dvector(chem.MgH, 0, NPRESSURE-1);	
-  free_dvector(chem.N, 0, NPRESSURE-1);	
-  free_dvector(chem.N2, 0, NPRESSURE-1);	
-  free_dvector(chem.NO2, 0, NPRESSURE-1);	
-  free_dvector(chem.NH3, 0, NPRESSURE-1);	
-  free_dvector(chem.NO, 0, NPRESSURE-1);	
-  free_dvector(chem.Na, 0, NPRESSURE-1);
-  free_dvector(chem.O, 0, NPRESSURE-1);	
-  free_dvector(chem.O2, 0, NPRESSURE-1);	
-  free_dvector(chem.O3, 0, NPRESSURE-1);	
-  free_dvector(chem.OCS, 0, NPRESSURE-1); 	
-  free_dvector(chem.OH, 0, NPRESSURE-1);	
-  free_dvector(chem.PH3, 0, NPRESSURE-1);	
-  free_dvector(chem.SH, 0, NPRESSURE-1);	
-  free_dvector(chem.SO2, 0, NPRESSURE-1);	
-  free_dvector(chem.SiH, 0, NPRESSURE-1);	
-  free_dvector(chem.SiO, 0, NPRESSURE-1);	
-  free_dvector(chem.TiO, 0, NPRESSURE-1);	
-  free_dvector(chem.VO, 0, NPRESSURE-1);	
-  free_dvector(chem.mu, 0, NPRESSURE-1);	
+  free_dvector(chem.total, 0, NTAU-1);
+  free_dvector(chem.C, 0, NTAU-1);	
+  free_dvector(chem.CH4, 0, NTAU-1);
+  free_dvector(chem.CO, 0, NTAU-1);
+  free_dvector(chem.CO2, 0, NTAU-1);
+  free_dvector(chem.C2H2, 0, NTAU-1);
+  free_dvector(chem.C2H4, 0, NTAU-1);	
+  free_dvector(chem.C2H6, 0, NTAU-1);		
+  free_dvector(chem.H, 0, NTAU-1);	
+  free_dvector(chem.HCN, 0, NTAU-1);	
+  free_dvector(chem.HCl, 0, NTAU-1);	
+  free_dvector(chem.HF, 0, NTAU-1);	
+  free_dvector(chem.H2, 0, NTAU-1);	
+  free_dvector(chem.H2CO, 0, NTAU-1);	
+  free_dvector(chem.H2O, 0, NTAU-1);	
+  free_dvector(chem.H2S, 0, NTAU-1);	
+  free_dvector(chem.He, 0, NTAU-1);	
+  free_dvector(chem.K, 0, NTAU-1);
+  free_dvector(chem.MgH, 0, NTAU-1);	
+  free_dvector(chem.N, 0, NTAU-1);	
+  free_dvector(chem.N2, 0, NTAU-1);	
+  free_dvector(chem.NO2, 0, NTAU-1);	
+  free_dvector(chem.NH3, 0, NTAU-1);	
+  free_dvector(chem.NO, 0, NTAU-1);	
+  free_dvector(chem.Na, 0, NTAU-1);
+  free_dvector(chem.O, 0, NTAU-1);	
+  free_dvector(chem.O2, 0, NTAU-1);	
+  free_dvector(chem.O3, 0, NTAU-1);	
+  free_dvector(chem.OCS, 0, NTAU-1); 	
+  free_dvector(chem.OH, 0, NTAU-1);	
+  free_dvector(chem.PH3, 0, NTAU-1);	
+  free_dvector(chem.SH, 0, NTAU-1);	
+  free_dvector(chem.SO2, 0, NTAU-1);	
+  free_dvector(chem.SiH, 0, NTAU-1);	
+  free_dvector(chem.SiO, 0, NTAU-1);	
+  free_dvector(chem.TiO, 0, NTAU-1);	
+  free_dvector(chem.VO, 0, NTAU-1);	
+  free_dvector(chem.mu, 0, NTAU-1);	
 
 }
 

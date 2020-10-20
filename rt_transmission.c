@@ -77,7 +77,7 @@ int RT_Transmit()
   ds = dvector(0, NTAU-1);
   theta = dvector(0, NTAU-1);
   dtheta = dvector(0, NTAU-1);
-  
+
   /*  Populate tau_tr with zeros */
   
   for (i=0; i<NLAMBDA; i++)
@@ -90,9 +90,6 @@ int RT_Transmit()
   
   for(j=0; j<NTAU; j++){
     
-    Locate(NTEMP, opac.T, atmos.T[j], &a);
-    Locate(NPRESSURE, opac.P, atmos.P[j], &b);
-    
     if(j==0){
       ds[j] = atmos.P[j]* (KBOLTZMANN * atmos.T[j]) /
 	(atmos.mu[j] * AMU * atmos.P[j]*G);
@@ -103,15 +100,11 @@ int RT_Transmit()
     }
 
     R += ds[j];
-    
     for(i=0; i<NLAMBDA; i++){
-      kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-			      atmos.T[j], atmos.P[j]);
-      dtau_nu[i][j] = kappa_nu[i][j] * ds[j];
+      dtau_nu[i][j] = atmos.kappa_nu[i][j] * ds[j];
     }
   }
+  printf("M A D E I T H E R E!!!\n");
   
   /*   Allocate memory and fill in tau_nu */
   

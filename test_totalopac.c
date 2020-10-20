@@ -264,16 +264,12 @@ void TotalOpac() {
           Locate(NTEMP, opacCH4.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacCH4.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacCH4.T[a], opacCH4.P[b], chem.CH4[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacCH4.T[a], opacCH4.P[b], chem.CH4[j]);
-          //};
+          //kappa_nu = Lint2D(opacCH4.T[a], opacCH4.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacCH4.kappa[i][a][b] * chem.CH4[j];
@@ -282,7 +278,7 @@ void TotalOpac() {
     printf("Read CH4 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCH4);                  //Free CH4 opacity table
-  };
+  }
   
   //This procedure repeats for all gases!!
   
@@ -302,16 +298,12 @@ void TotalOpac() {
           Locate(NTEMP, opacCO2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacCO2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacCO2.T[a], opacCO2.P[b], chem.CO2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacCO2.T[a], opacCO2.P[b], chem.CO2[j]);
-          //};
+          //kappa_nu = Lint2D(opacCO2.T[a], opacCO2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacCO2.kappa[i][a][b] * chem.CO2[j];
@@ -320,7 +312,7 @@ void TotalOpac() {
     printf("Read CO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCO2);                  //Free CO2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If CO is selected
     opacCO.name = "CO";             //Name it CO
@@ -338,16 +330,12 @@ void TotalOpac() {
           Locate(NTEMP, opacCO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacCO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacCO.T[a], opacCO.P[b], chem.CO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacCO.T[a], opacCO.P[b], chem.CO[j]);
-          //};
+          //kappa_nu = Lint2D(opacCO.T[a], opacCO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacCO.kappa[i][a][b] * chem.CO[j];
@@ -356,7 +344,7 @@ void TotalOpac() {
     printf("Read CO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCO);                  //Free CO opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If H2O is selected
     opacH2O.name = "H2O";             //Name it H2O
@@ -374,16 +362,12 @@ void TotalOpac() {
           Locate(NTEMP, opacH2O.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacH2O.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacH2O.T[a], opacH2O.P[b], chem.H2O[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacH2O.T[a], opacH2O.P[b], chem.H2O[j]);
-          //};
+          //kappa_nu = Lint2D(opacH2O.T[a], opacH2O.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacH2O.kappa[i][a][b] * chem.H2O[j];
@@ -392,7 +376,7 @@ void TotalOpac() {
     printf("Read H2O Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2O);                  //Free H2O opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If NH3 is selected
     opacNH3.name = "NH3";             //Name it NH3
@@ -410,16 +394,12 @@ void TotalOpac() {
           Locate(NTEMP, opacNH3.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacNH3.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacNH3.T[a], opacNH3.P[b], chem.NH3[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacNH3.T[a], opacNH3.P[b], chem.NH3[j]);
-          //};
+          //kappa_nu = Lint2D(opacNH3.T[a], opacNH3.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacNH3.kappa[i][a][b] * chem.NH3[j];
@@ -428,7 +408,7 @@ void TotalOpac() {
     printf("Read NH3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNH3);                  //Free NH3 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If O2 is selected
     opacO2.name = "O2";             //Name it O2
@@ -446,16 +426,12 @@ void TotalOpac() {
           Locate(NTEMP, opacO2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacO2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacO2.T[a], opacO2.P[b], chem.O2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacO2.T[a], opacO2.P[b], chem.O2[j]);
-          //};
+          //kappa_nu = Lint2D(opacO2.T[a], opacO2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacO2.kappa[i][a][b] * chem.O2[j];
@@ -464,7 +440,7 @@ void TotalOpac() {
     printf("Read O2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacO2);                  //Free O2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If O3 is selected
     opacO3.name = "O3";             //Name it O3
@@ -482,16 +458,12 @@ void TotalOpac() {
           Locate(NTEMP, opacO3.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacO3.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacO3.T[a], opacO3.P[b], chem.O3[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacO3.T[a], opacO3.P[b], chem.O3[j]);
-          //};
+          //kappa_nu = Lint2D(opacO3.T[a], opacO3.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacO3.kappa[i][a][b] * chem.O3[j];
@@ -500,7 +472,7 @@ void TotalOpac() {
     printf("Read O3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacO3);                  //Free O3 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If C2H2 is selected
     opacC2H2.name = "C2H2";             //Name it C2H2
@@ -518,16 +490,12 @@ void TotalOpac() {
           Locate(NTEMP, opacC2H2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacC2H2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacC2H2.T[a], opacC2H2.P[b], chem.C2H2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacC2H2.T[a], opacC2H2.P[b], chem.C2H2[j]);
-          //};
+          //kappa_nu = Lint2D(opacC2H2.T[a], opacC2H2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacC2H2.kappa[i][a][b] * chem.C2H2[j];
@@ -536,7 +504,7 @@ void TotalOpac() {
     printf("Read C2H2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H2);                  //Free C2H2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If C2H4 is selected
     opacC2H4.name = "C2H4";             //Name it C2H4
@@ -554,16 +522,12 @@ void TotalOpac() {
           Locate(NTEMP, opacC2H4.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacC2H4.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacC2H4.T[a], opacC2H4.P[b], chem.C2H4[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacC2H4.T[a], opacC2H4.P[b], chem.C2H4[j]);
-          //};
+          //kappa_nu = Lint2D(opacC2H4.T[a], opacC2H4.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacC2H4.kappa[i][a][b] * chem.C2H4[j];
@@ -572,7 +536,7 @@ void TotalOpac() {
     printf("Read C2H4 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H4);                  //Free C2H4 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If C2H6 is selected
     opacC2H6.name = "C2H6";             //Name it C2H6
@@ -590,16 +554,12 @@ void TotalOpac() {
           Locate(NTEMP, opacC2H6.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacC2H6.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacC2H6.T[a], opacC2H6.P[b], chem.C2H6[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacC2H6.T[a], opacC2H6.P[b], chem.C2H6[j]);
-          //};
+          //kappa_nu = Lint2D(opacC2H6.T[a], opacC2H6.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacC2H6.kappa[i][a][b] * chem.C2H6[j];
@@ -608,7 +568,7 @@ void TotalOpac() {
     printf("Read C2H6 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H6);                  //Free C2H6 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If H2CO is selected
     opacH2CO.name = "H2CO";             //Name it H2CO
@@ -626,16 +586,12 @@ void TotalOpac() {
           Locate(NTEMP, opacH2CO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacH2CO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacH2CO.T[a], opacH2CO.P[b], chem.H2CO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacH2CO.T[a], opacH2CO.P[b], chem.H2CO[j]);
-          //};
+          //kappa_nu = Lint2D(opacH2CO.T[a], opacH2CO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacH2CO.kappa[i][a][b] * chem.H2CO[j];
@@ -644,7 +600,7 @@ void TotalOpac() {
     printf("Read H2CO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2CO);                  //Free H2CO opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If H2S is selected
     opacH2S.name = "H2S";             //Name it H2S
@@ -662,16 +618,12 @@ void TotalOpac() {
           Locate(NTEMP, opacH2S.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacH2S.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacH2S.T[a], opacH2S.P[b], chem.H2S[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacH2S.T[a], opacH2S.P[b], chem.H2S[j]);
-          //};
+          //kappa_nu = Lint2D(opacH2S.T[a], opacH2S.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacH2S.kappa[i][a][b] * chem.H2S[j];
@@ -680,7 +632,7 @@ void TotalOpac() {
     printf("Read H2S Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2S);                  //Free H2S opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If HCl is selected
     opacHCl.name = "HCl";             //Name it HCl
@@ -698,16 +650,12 @@ void TotalOpac() {
           Locate(NTEMP, opacHCl.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacHCl.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacHCl.T[a], opacHCl.P[b], chem.HCl[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacHCl.T[a], opacHCl.P[b], chem.HCl[j]);
-          //};
+          //kappa_nu = Lint2D(opacHCl.T[a], opacHCl.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacHCl.kappa[i][a][b] * chem.HCl[j];
@@ -716,7 +664,7 @@ void TotalOpac() {
     printf("Read HCl Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHCl);                  //Free HCl opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If HCN is selected
     opacHCN.name = "HCN";             //Name it HCN
@@ -734,16 +682,12 @@ void TotalOpac() {
           Locate(NTEMP, opacHCN.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacHCN.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacHCN.T[a], opacHCN.P[b], chem.HCN[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacHCN.T[a], opacHCN.P[b], chem.HCN[j]);
-          //};
+          //kappa_nu = Lint2D(opacHCN.T[a], opacHCN.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacHCN.kappa[i][a][b] * chem.HCN[j];
@@ -752,7 +696,7 @@ void TotalOpac() {
     printf("Read HCN Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHCN);                  //Free HCN opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If HF is selected
     opacHF.name = "HF";             //Name it HF
@@ -770,16 +714,12 @@ void TotalOpac() {
           Locate(NTEMP, opacHF.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacHF.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacHF.T[a], opacHF.P[b], chem.HF[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacHF.T[a], opacHF.P[b], chem.HF[j]);
-          //};
+          //kappa_nu = Lint2D(opacHF.T[a], opacHF.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacHF.kappa[i][a][b] * chem.HF[j];
@@ -788,7 +728,7 @@ void TotalOpac() {
     printf("Read HF Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHF);                  //Free HF opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If MgH is selected
     opacMgH.name = "MgH";             //Name it MgH
@@ -806,16 +746,12 @@ void TotalOpac() {
           Locate(NTEMP, opacMgH.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacMgH.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacMgH.T[a], opacMgH.P[b], chem.MgH[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacMgH.T[a], opacMgH.P[b], chem.MgH[j]);
-          //};
+          //kappa_nu = Lint2D(opacMgH.T[a], opacMgH.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacMgH.kappa[i][a][b] * chem.MgH[j];
@@ -824,7 +760,7 @@ void TotalOpac() {
     printf("Read MgH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacMgH);                  //Free MgH opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If N2 is selected
     opacN2.name = "N2";             //Name it N2
@@ -842,16 +778,12 @@ void TotalOpac() {
           Locate(NTEMP, opacN2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacN2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacN2.T[a], opacN2.P[b], chem.N2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacN2.T[a], opacN2.P[b], chem.N2[j]);
-          //};
+          //kappa_nu = Lint2D(opacN2.T[a], opacN2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacN2.kappa[i][a][b] * chem.N2[j];
@@ -860,7 +792,7 @@ void TotalOpac() {
     printf("Read N2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacN2);                  //Free N2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If NO is selected
     opacNO.name = "NO";             //Name it NO
@@ -878,16 +810,12 @@ void TotalOpac() {
           Locate(NTEMP, opacNO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacNO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacNO.T[a], opacNO.P[b], chem.NO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacNO.T[a], opacNO.P[b], chem.NO[j]);
-          //};
+          //kappa_nu = Lint2D(opacNO.T[a], opacNO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacNO.kappa[i][a][b] * chem.NO[j];
@@ -896,7 +824,7 @@ void TotalOpac() {
     printf("Read NO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNO);                  //Free NO opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If NO2 is selected
     opacNO2.name = "NO2";             //Name it NO2
@@ -914,16 +842,12 @@ void TotalOpac() {
           Locate(NTEMP, opacNO2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacNO2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacNO2.T[a], opacNO2.P[b], chem.NO2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacNO2.T[a], opacNO2.P[b], chem.NO2[j]);
-          //};
+          //kappa_nu = Lint2D(opacNO2.T[a], opacNO2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacNO2.kappa[i][a][b] * chem.NO2[j];
@@ -932,7 +856,7 @@ void TotalOpac() {
     printf("Read NO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNO2);                  //Free NO2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If OCS is selected
     opacOCS.name = "OCS";             //Name it OCS
@@ -950,16 +874,12 @@ void TotalOpac() {
           Locate(NTEMP, opacOCS.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacOCS.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacOCS.T[a], opacOCS.P[b], chem.OCS[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacOCS.T[a], opacOCS.P[b], chem.OCS[j]);
-          //};
+          //kappa_nu = Lint2D(opacOCS.T[a], opacOCS.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacOCS.kappa[i][a][b] * chem.OCS[j];
@@ -968,7 +888,7 @@ void TotalOpac() {
     printf("Read OCS Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacOCS);                  //Free OCS opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If OH is selected
     opacOH.name = "OH";             //Name it OH
@@ -986,16 +906,12 @@ void TotalOpac() {
           Locate(NTEMP, opacOH.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacOH.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacOH.T[a], opacOH.P[b], chem.OH[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacOH.T[a], opacOH.P[b], chem.OH[j]);
-          //};
+          //kappa_nu = Lint2D(opacOH.T[a], opacOH.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacOH.kappa[i][a][b] * chem.OH[j];
@@ -1004,7 +920,7 @@ void TotalOpac() {
     printf("Read OH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacOH);                  //Free OH opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If PH3 is selected
     opacPH3.name = "PH3";             //Name it PH3
@@ -1022,16 +938,12 @@ void TotalOpac() {
           Locate(NTEMP, opacPH3.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacPH3.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacPH3.T[a], opacPH3.P[b], chem.PH3[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacPH3.T[a], opacPH3.P[b], chem.PH3[j]);
-          //};
+          //kappa_nu = Lint2D(opacPH3.T[a], opacPH3.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacPH3.kappa[i][a][b] * chem.PH3[j];
@@ -1040,7 +952,7 @@ void TotalOpac() {
     printf("Read PH3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacPH3);                  //Free PH3 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If SH is selected
     opacSH.name = "SH";             //Name it SH
@@ -1058,16 +970,12 @@ void TotalOpac() {
           Locate(NTEMP, opacSH.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacSH.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacSH.T[a], opacSH.P[b], chem.SH[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacSH.T[a], opacSH.P[b], chem.SH[j]);
-          //};
+          //kappa_nu = Lint2D(opacSH.T[a], opacSH.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacSH.kappa[i][a][b] * chem.SH[j];
@@ -1076,7 +984,7 @@ void TotalOpac() {
     printf("Read SH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSH);                  //Free SH opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If SiH is selected
     opacSiH.name = "SiH";             //Name it SiH
@@ -1094,16 +1002,12 @@ void TotalOpac() {
           Locate(NTEMP, opacSiH.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacSiH.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacSiH.T[a], opacSiH.P[b], chem.SiH[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacSiH.T[a], opacSiH.P[b], chem.SiH[j]);
-          //};
+          //kappa_nu = Lint2D(opacSiH.T[a], opacSiH.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacSiH.kappa[i][a][b] * chem.SiH[j];
@@ -1112,7 +1016,7 @@ void TotalOpac() {
     printf("Read SiH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSiH);                  //Free SiH opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If SiO is selected
     opacSiO.name = "SiO";             //Name it SiO
@@ -1130,16 +1034,12 @@ void TotalOpac() {
           Locate(NTEMP, opacSiO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacSiO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacSiO.T[a], opacSiO.P[b], chem.SiO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacSiO.T[a], opacSiO.P[b], chem.SiO[j]);
-          //};
+          //kappa_nu = Lint2D(opacSiO.T[a], opacSiO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacSiO.kappa[i][a][b] * chem.SiO[j];
@@ -1148,7 +1048,7 @@ void TotalOpac() {
     printf("Read SiO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSiO);                  //Free SiO opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If SO2 is selected
     opacSO2.name = "SO2";             //Name it SO2
@@ -1166,16 +1066,12 @@ void TotalOpac() {
           Locate(NTEMP, opacSO2.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacSO2.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacSO2.T[a], opacSO2.P[b], chem.SO2[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacSO2.T[a], opacSO2.P[b], chem.SO2[j]);
-          //};
+          //kappa_nu = Lint2D(opacSO2.T[a], opacSO2.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacSO2.kappa[i][a][b] * chem.SO2[j];
@@ -1184,7 +1080,7 @@ void TotalOpac() {
     printf("Read SO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSO2);                  //Free SO2 opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If TiO is selected
     opacTiO.name = "TiO";             //Name it TiO
@@ -1202,16 +1098,12 @@ void TotalOpac() {
           Locate(NTEMP, opacTiO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacTiO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacTiO.T[a], opacTiO.P[b], chem.TiO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacTiO.T[a], opacTiO.P[b], chem.TiO[j]);
-          //};
+          //kappa_nu = Lint2D(opacTiO.T[a], opacTiO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacTiO.kappa[i][a][b] * chem.TiO[j];
@@ -1220,7 +1112,7 @@ void TotalOpac() {
     printf("Read TiO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacTiO);                  //Free TiO opacity table
-  };
+  }
   
   if(chemSelection[0] == 1){          //If VO is selected
     opacVO.name = "VO";             //Name it VO
@@ -1238,16 +1130,12 @@ void TotalOpac() {
           Locate(NTEMP, opacVO.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacVO.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacVO.T[a], opacVO.P[b], chem.VO[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacVO.T[a], opacVO.P[b], chem.VO[j]);
-          //};
+          //kappa_nu = Lint2D(opacVO.T[a], opacVO.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacVO.kappa[i][a][b] * chem.VO[j];
@@ -1256,7 +1144,7 @@ void TotalOpac() {
     printf("Read VO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacVO);                  //Free VO opacity table
-  };
+  }
 
   /* Atomic opacities */
 
@@ -1276,16 +1164,12 @@ void TotalOpac() {
           Locate(NTEMP, opacNa.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacNa.P, atmos.P[j], &b);
 
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacNa.T[a], opacNa.P[b], chem.Na[j]);
+          };
 
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacNa.T[a], opacNa.P[b], chem.Na[j]);
-          //};
+          //kappa_nu = Lint2D(opacNa.T[a], opacNa.P[b],
 
 	  /* Add to overall opac.kappa */
 	  atmos.kappa_nu[i][j] += opacNa.kappa[i][a][b] * chem.Na[j];
@@ -1294,43 +1178,31 @@ void TotalOpac() {
     printf("Read Na Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNa);                  //Free Na opacity table
-  };
+  }
 
-  if(chemSelection[0] == 1){          //If K is selected
-    opacK.name = "K";             //Name it K
-    opacK.T = dvector(0, NTEMP-1);  //Declare T, P, Plog10, and kappa arrays
+  /* Fill in K opacities */
+  if(chemSelection[29] == 1){
+    opacK.name = "K";
+    opacK.T = dvector(0, NTEMP-1);
     opacK.P = dvector(0, NPRESSURE-1);
     opacK.Plog10 = dvector(0, NPRESSURE-1);
     opacK.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    //opacK.abundance = dvector(0, NTAU-1);
+    for(j=0; j<NPRESSURE; j++){
+  	//opacK.abundance[j] = chem.K[j];
+    }
+    ReadOpacTable(opacK, fileArray[32]);
     
-    ReadOpacTable(opacK, fileArray[3]);     //Read opacity table for K
+    //Populate opac.kappa
+    for (i=0; i<NLAMBDA; i++)
+      for (j=0; j<NPRESSURE; j++)
+          for (k=0; k<NTEMP; k++)
+  	  opac.kappa[i][j][k] += opacK.kappa[i][j][k];
     
-    /* Populate atmos.kappa_nu */
-    for (i=0; i<NLAMBDA; i++){
-      for (j=0; j<NTAU; j++) {
-          /* Interpolate from TP grid onto the altitude grid */
-          Locate(NTEMP, opacK.T, atmos.T[j], &a);
-          Locate(NPRESSURE, opacK.P, atmos.P[j], &b);
-
-
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          //if (j == 0) {
-          //  printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-          //        i, j, a, b, opacK.T[a], opacK.P[b], chem.K[j]);
-          //};
-
-	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacK.kappa[i][a][b] * chem.K[j];
-      }
-    };
-    printf("Read K Opacity done\n");	     //Confirmation message
+    printf("Read K Opacity done\n");
     
-    FreeOpacTable(opacK);                  //Free K opacity table
-  };
+    FreeOpacTable(opacK);
+  }
   
   /* Fill in total opacities */
   
@@ -1392,28 +1264,59 @@ void TotalOpac() {
     };
     
 
-    /* Populate atmos.kappa_nu */
     for (i=0; i<NLAMBDA; i++){
-      for (j=0; j<NTAU; j++) {
-          /* Interpolate from TP grid onto the altitude grid */
-          Locate(NTEMP, opacCIA.T, atmos.T[j], &a);
-          Locate(NPRESSURE, opacCIA.P, atmos.P[j], &b);
-
-
-          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
-      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
-      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
-      			      atmos.T[j], atmos.P[j]);
-
-          if (j == 0) {
-            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
-                  i, j, a, b, opacCIA.T[a], opacCIA.P[b], chem.K[j]);
-          };
-
-	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCIA.kappa[i][a][b] * chem.K[j];
+      for (j=0; j<NPRESSURE; j++){
+          for (k=0; k<NTEMP; k++) {
+	  opacCIA.kappa[i][j][k] += opac_CIA_H2H2[k][i] * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_H2He[k][i] * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.He[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_H2H[k][i] * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.H[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_H2CH4[k][i] * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.CH4[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  /* opacCIA.kappa[i][j][k] += opac_CIA_CH4Ar[k][i] *  */
+	  /*   chem.CH4[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) *  */
+	  /*   chem.Ar[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]); */
+	  opacCIA.kappa[i][j][k] += opac_CIA_CH4CH4[k][i] * 
+	    chem.CH4[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.CH4[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_CO2CO2[k][i] * 
+	    chem.CO2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.CO2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_HeH[k][i] * 
+	    chem.He[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.H[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_N2CH4[k][i] * 
+	    chem.N2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.CH4[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_N2H2[k][i] * 
+	    chem.N2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.H2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_N2N2[k][i] * 
+	    chem.N2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.N2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_O2CO2[k][i] * 
+	    chem.O2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.CO2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_O2N2[k][i] * 
+	    chem.O2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.N2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
+	  opacCIA.kappa[i][j][k] += opac_CIA_O2O2[k][i] * 
+	    chem.O2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]) * 
+	    chem.O2[j] * opac.P[j] / (KBOLTZMANN * opac.T[k]);
       }
-    };
+    }
+    }
+	      
+    for(i = 0; i < NLAMBDA; i++)
+      for(j = 0; j < NPRESSURE; j++)
+          for (k=0; k < NTEMP; k++)
+  	  opac.kappa[i][j][k] += opacCIA.kappa[i][j][k]; //Add to overall kappa
     
     FreeOpacTable(opacCIA);
   }
@@ -1430,7 +1333,7 @@ void TotalOpac() {
     opacscat.T = dvector(0, NTEMP-1);
     opacscat.P = dvector(0, NPRESSURE-1);
     opacscat.Plog10 = dvector(0, NPRESSURE-1);
-    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NTAU-1, 0, 1);
+    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
     //opacscat.abundance = dvector(0, NTAU-1);
     
     //populate with zeros	
@@ -1441,12 +1344,8 @@ void TotalOpac() {
     
     /* Fill in scattering coefficients */
     for (i=0; i<NLAMBDA; i++) {
-      for (j=0; j<NTAU; j++) {
-          // This is a temporary bypass of the third loop since this
-          // calculation does not directly depend on anything beyond known
-          // quantities on the atmosphere grid -- Teal
-          k = 0;
-
+      for (j=0; j<NPRESSURE; j++) {
+          for (k=0; k<NTEMP; k++) {
 	  /* Add Rayleigh scattering polarizability to overall kappa */
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
@@ -1530,9 +1429,10 @@ void TotalOpac() {
 	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j]);
 	  
 	  opacscat.kappa[i][j][k] *= RAYLEIGH;
-          atmos.kappa_nu[i][j] += opacscat.kappa[i][j][k];
+	  opac.kappa[i][j][k] += opacscat.kappa[i][j][k];
 	}
       }
+    }
     
     FreeOpacTable(opacscat);
   }
