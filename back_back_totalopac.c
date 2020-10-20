@@ -282,7 +282,7 @@ void TotalOpac() {
     printf("Read CH4 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCH4);                  //Free CH4 opacity table
-  }
+  };
   
   //This procedure repeats for all gases!!
   
@@ -1105,89 +1105,112 @@ void TotalOpac() {
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.H2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.H2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(0.21e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.He[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.He[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(1.74e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.N2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.N2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(1.45e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.H2O[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.H2O[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(1.95e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.CO[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.CO[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(2.91e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.CO2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.CO2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(2.26e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.NH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.NH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(2.59e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.CH4[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.CH4[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(1.58e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.O2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.O2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(3.21e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.O3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.O3[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(3.33e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.C2H2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.C2H2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(4.25e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.C2H4[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.C2H4[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(4.47e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.C2H6[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.C2H6[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(2.59e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.HCN[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.HCN[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(2.63e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.HCl[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.HCl[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.HF[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.HF[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(3.78e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.H2S[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.H2S[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(1.70e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.NO[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.NO[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(3.02e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.NO2[j]*chem.P[j] / (KBOLTZMANN * chem.T[j])
+	    chem.NO2[j]*chem.P[j] / (KBOLTZMANN * chem.T[k])
 	    +
 	    (8.0*PI/3.0) * SQ(4.84e-30) *
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
-	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j]);
+	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[k]);
 	  
 	  opacscat.kappa[i][j][k] *= RAYLEIGH;
 	  opac.kappa[i][j][k] += opacscat.kappa[i][j][k];
 	}
       }
     }
+
+    /* Populate atmos.kappa_nu */
+    for (i=0; i<NLAMBDA; i++){
+      for (j=0; j<NTAU; j++) {
+          /* Interpolate from TP grid onto the altitude grid */
+          Locate(NTEMP, opacscat.T, atmos.T[j], &a);
+          Locate(NPRESSURE, opacscat.P, atmos.P[j], &b);
+
+
+          kappa_nu[i][j] = lint2D(opac.T[a], opac.T[a+1], opac.P[b], opac.P[b+1],
+      			      opac.kappa[i][b][a], opac.kappa[i][b][a+1],
+      			      opac.kappa[i][b+1][a], opac.kappa[i][b+1][a+1],
+      			      atmos.T[j], atmos.P[j]);
+
+          if (j == 0) {
+            printf("i = %d, j = %d, a = %d, b = %d, T = %e, P = %e, MR = %e\n",
+                  i, j, a, b, opacscat.T[a], opacscat.P[b], chem.K[j]);
+          };
+
+	  /* Add to overall opac.kappa */
+	  atmos.kappa_nu[i][j] += opacscat.kappa[i][a][b];
+      }
+    };
     
     FreeOpacTable(opacscat);
   }

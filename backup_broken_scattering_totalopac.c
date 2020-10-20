@@ -282,7 +282,7 @@ void TotalOpac() {
     printf("Read CH4 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCH4);                  //Free CH4 opacity table
-  }
+  };
   
   //This procedure repeats for all gases!!
   
@@ -320,7 +320,7 @@ void TotalOpac() {
     printf("Read CO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCO2);                  //Free CO2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If CO is selected
     opacCO.name = "CO";             //Name it CO
@@ -356,7 +356,7 @@ void TotalOpac() {
     printf("Read CO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacCO);                  //Free CO opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If H2O is selected
     opacH2O.name = "H2O";             //Name it H2O
@@ -392,7 +392,7 @@ void TotalOpac() {
     printf("Read H2O Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2O);                  //Free H2O opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If NH3 is selected
     opacNH3.name = "NH3";             //Name it NH3
@@ -428,7 +428,7 @@ void TotalOpac() {
     printf("Read NH3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNH3);                  //Free NH3 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If O2 is selected
     opacO2.name = "O2";             //Name it O2
@@ -464,7 +464,7 @@ void TotalOpac() {
     printf("Read O2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacO2);                  //Free O2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If O3 is selected
     opacO3.name = "O3";             //Name it O3
@@ -500,7 +500,7 @@ void TotalOpac() {
     printf("Read O3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacO3);                  //Free O3 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If C2H2 is selected
     opacC2H2.name = "C2H2";             //Name it C2H2
@@ -536,7 +536,7 @@ void TotalOpac() {
     printf("Read C2H2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H2);                  //Free C2H2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If C2H4 is selected
     opacC2H4.name = "C2H4";             //Name it C2H4
@@ -572,7 +572,7 @@ void TotalOpac() {
     printf("Read C2H4 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H4);                  //Free C2H4 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If C2H6 is selected
     opacC2H6.name = "C2H6";             //Name it C2H6
@@ -608,7 +608,7 @@ void TotalOpac() {
     printf("Read C2H6 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacC2H6);                  //Free C2H6 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If H2CO is selected
     opacH2CO.name = "H2CO";             //Name it H2CO
@@ -644,7 +644,7 @@ void TotalOpac() {
     printf("Read H2CO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2CO);                  //Free H2CO opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If H2S is selected
     opacH2S.name = "H2S";             //Name it H2S
@@ -680,7 +680,7 @@ void TotalOpac() {
     printf("Read H2S Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacH2S);                  //Free H2S opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If HCl is selected
     opacHCl.name = "HCl";             //Name it HCl
@@ -716,7 +716,7 @@ void TotalOpac() {
     printf("Read HCl Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHCl);                  //Free HCl opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If HCN is selected
     opacHCN.name = "HCN";             //Name it HCN
@@ -752,7 +752,7 @@ void TotalOpac() {
     printf("Read HCN Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHCN);                  //Free HCN opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If HF is selected
     opacHF.name = "HF";             //Name it HF
@@ -788,7 +788,7 @@ void TotalOpac() {
     printf("Read HF Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacHF);                  //Free HF opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If MgH is selected
     opacMgH.name = "MgH";             //Name it MgH
@@ -824,7 +824,7 @@ void TotalOpac() {
     printf("Read MgH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacMgH);                  //Free MgH opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If N2 is selected
     opacN2.name = "N2";             //Name it N2
@@ -860,7 +860,7 @@ void TotalOpac() {
     printf("Read N2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacN2);                  //Free N2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If NO is selected
     opacNO.name = "NO";             //Name it NO
@@ -896,7 +896,7 @@ void TotalOpac() {
     printf("Read NO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNO);                  //Free NO opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If NO2 is selected
     opacNO2.name = "NO2";             //Name it NO2
@@ -932,7 +932,7 @@ void TotalOpac() {
     printf("Read NO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNO2);                  //Free NO2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If OCS is selected
     opacOCS.name = "OCS";             //Name it OCS
@@ -968,7 +968,7 @@ void TotalOpac() {
     printf("Read OCS Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacOCS);                  //Free OCS opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If OH is selected
     opacOH.name = "OH";             //Name it OH
@@ -1004,7 +1004,7 @@ void TotalOpac() {
     printf("Read OH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacOH);                  //Free OH opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If PH3 is selected
     opacPH3.name = "PH3";             //Name it PH3
@@ -1040,7 +1040,7 @@ void TotalOpac() {
     printf("Read PH3 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacPH3);                  //Free PH3 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If SH is selected
     opacSH.name = "SH";             //Name it SH
@@ -1076,7 +1076,7 @@ void TotalOpac() {
     printf("Read SH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSH);                  //Free SH opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If SiH is selected
     opacSiH.name = "SiH";             //Name it SiH
@@ -1112,7 +1112,7 @@ void TotalOpac() {
     printf("Read SiH Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSiH);                  //Free SiH opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If SiO is selected
     opacSiO.name = "SiO";             //Name it SiO
@@ -1148,7 +1148,7 @@ void TotalOpac() {
     printf("Read SiO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSiO);                  //Free SiO opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If SO2 is selected
     opacSO2.name = "SO2";             //Name it SO2
@@ -1184,7 +1184,7 @@ void TotalOpac() {
     printf("Read SO2 Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacSO2);                  //Free SO2 opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If TiO is selected
     opacTiO.name = "TiO";             //Name it TiO
@@ -1220,7 +1220,7 @@ void TotalOpac() {
     printf("Read TiO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacTiO);                  //Free TiO opacity table
-  }
+  };
   
   if(chemSelection[0] == 1){          //If VO is selected
     opacVO.name = "VO";             //Name it VO
@@ -1256,7 +1256,7 @@ void TotalOpac() {
     printf("Read VO Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacVO);                  //Free VO opacity table
-  }
+  };
 
   /* Atomic opacities */
 
@@ -1294,7 +1294,7 @@ void TotalOpac() {
     printf("Read Na Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacNa);                  //Free Na opacity table
-  }
+  };
 
   if(chemSelection[0] == 1){          //If K is selected
     opacK.name = "K";             //Name it K
@@ -1330,7 +1330,7 @@ void TotalOpac() {
     printf("Read K Opacity done\n");	     //Confirmation message
     
     FreeOpacTable(opacK);                  //Free K opacity table
-  }
+  };
   
   /* Fill in total opacities */
   
@@ -1430,7 +1430,7 @@ void TotalOpac() {
     opacscat.T = dvector(0, NTEMP-1);
     opacscat.P = dvector(0, NPRESSURE-1);
     opacscat.Plog10 = dvector(0, NPRESSURE-1);
-    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    opacscat.kappa = d3tensor(0, NLAMBDA-1, 0, NTAU-1, 0, 1);
     //opacscat.abundance = dvector(0, NTAU-1);
     
     //populate with zeros	
@@ -1441,8 +1441,12 @@ void TotalOpac() {
     
     /* Fill in scattering coefficients */
     for (i=0; i<NLAMBDA; i++) {
-      for (j=0; j<NPRESSURE; j++) {
-          for (k=0; k<NTEMP; k++) {
+      for (j=0; j<NTAU; j++) {
+          // This is a temporary bypass of the third loop since this
+          // calculation does not directly depend on anything beyond known
+          // quantities on the atmosphere grid -- Teal
+          k = 0;
+
 	  /* Add Rayleigh scattering polarizability to overall kappa */
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
@@ -1525,11 +1529,10 @@ void TotalOpac() {
 	    SQ(2.0*PI/ atmos.lambda[i]) * SQ(2.0*PI/ atmos.lambda[i]) *
 	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j]);
 	  
-	  opacscat.kappa[i][j][k] *= RAYLEIGH;
-	  opac.kappa[i][j][k] += opacscat.kappa[i][j][k];
+	  opacscat.kappa[i][j][k] *= 0.; // RAYLEIGH;
+          atmos.kappa_nu[i][j] += opacscat.kappa[i][j][k];
 	}
       }
-    }
     
     FreeOpacTable(opacscat);
   }
