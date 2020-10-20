@@ -276,7 +276,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCH4.kappa[i][a][b] * chem.CH4[j];
+	  atmos.kappa_nu[i][j] += opacCH4.kappa[i][a][b]; //* chem.CH4[j];
       }
     };
     printf("Read CH4 Opacity done\n");	     //Confirmation message
@@ -314,7 +314,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCO2.kappa[i][a][b] * chem.CO2[j];
+	  atmos.kappa_nu[i][j] += opacCO2.kappa[i][a][b]; //* chem.CO2[j];
       }
     };
     printf("Read CO2 Opacity done\n");	     //Confirmation message
@@ -350,7 +350,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCO.kappa[i][a][b] * chem.CO[j];
+	  atmos.kappa_nu[i][j] += opacCO.kappa[i][a][b]; //* chem.CO[j];
       }
     };
     printf("Read CO Opacity done\n");	     //Confirmation message
@@ -386,7 +386,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacH2O.kappa[i][a][b] * chem.H2O[j];
+	  atmos.kappa_nu[i][j] += opacH2O.kappa[i][a][b]; //* chem.H2O[j];
       }
     };
     printf("Read H2O Opacity done\n");	     //Confirmation message
@@ -422,7 +422,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacNH3.kappa[i][a][b] * chem.NH3[j];
+	  atmos.kappa_nu[i][j] += opacNH3.kappa[i][a][b]; //* chem.NH3[j];
       }
     };
     printf("Read NH3 Opacity done\n");	     //Confirmation message
@@ -458,7 +458,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacO2.kappa[i][a][b] * chem.O2[j];
+	  atmos.kappa_nu[i][j] += opacO2.kappa[i][a][b]; //* chem.O2[j];
       }
     };
     printf("Read O2 Opacity done\n");	     //Confirmation message
@@ -494,7 +494,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacO3.kappa[i][a][b] * chem.O3[j];
+	  atmos.kappa_nu[i][j] += opacO3.kappa[i][a][b]; //* chem.O3[j];
       }
     };
     printf("Read O3 Opacity done\n");	     //Confirmation message
@@ -530,7 +530,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacC2H2.kappa[i][a][b] * chem.C2H2[j];
+	  atmos.kappa_nu[i][j] += opacC2H2.kappa[i][a][b]; //* chem.C2H2[j];
       }
     };
     printf("Read C2H2 Opacity done\n");	     //Confirmation message
@@ -566,7 +566,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacC2H4.kappa[i][a][b] * chem.C2H4[j];
+	  atmos.kappa_nu[i][j] += opacC2H4.kappa[i][a][b]; //* chem.C2H4[j];
       }
     };
     printf("Read C2H4 Opacity done\n");	     //Confirmation message
@@ -602,7 +602,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacC2H6.kappa[i][a][b] * chem.C2H6[j];
+	  atmos.kappa_nu[i][j] += opacC2H6.kappa[i][a][b]; //* chem.C2H6[j];
       }
     };
     printf("Read C2H6 Opacity done\n");	     //Confirmation message
@@ -638,7 +638,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacH2CO.kappa[i][a][b] * chem.H2CO[j];
+	  atmos.kappa_nu[i][j] += opacH2CO.kappa[i][a][b]; //* chem.H2CO[j];
       }
     };
     printf("Read H2CO Opacity done\n");	     //Confirmation message
@@ -674,7 +674,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacH2S.kappa[i][a][b] * chem.H2S[j];
+	  atmos.kappa_nu[i][j] += opacH2S.kappa[i][a][b]; //* chem.H2S[j];
       }
     };
     printf("Read H2S Opacity done\n");	     //Confirmation message
@@ -710,7 +710,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacHCl.kappa[i][a][b] * chem.HCl[j];
+	  atmos.kappa_nu[i][j] += opacHCl.kappa[i][a][b]; //* chem.HCl[j];
       }
     };
     printf("Read HCl Opacity done\n");	     //Confirmation message
@@ -746,7 +746,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacHCN.kappa[i][a][b] * chem.HCN[j];
+	  atmos.kappa_nu[i][j] += opacHCN.kappa[i][a][b]; //* chem.HCN[j];
       }
     };
     printf("Read HCN Opacity done\n");	     //Confirmation message
@@ -782,7 +782,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacHF.kappa[i][a][b] * chem.HF[j];
+	  atmos.kappa_nu[i][j] += opacHF.kappa[i][a][b]; //* chem.HF[j];
       }
     };
     printf("Read HF Opacity done\n");	     //Confirmation message
@@ -818,7 +818,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacMgH.kappa[i][a][b] * chem.MgH[j];
+	  atmos.kappa_nu[i][j] += opacMgH.kappa[i][a][b]; //* chem.MgH[j];
       }
     };
     printf("Read MgH Opacity done\n");	     //Confirmation message
@@ -854,7 +854,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacN2.kappa[i][a][b] * chem.N2[j];
+	  atmos.kappa_nu[i][j] += opacN2.kappa[i][a][b]; //* chem.N2[j];
       }
     };
     printf("Read N2 Opacity done\n");	     //Confirmation message
@@ -890,7 +890,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacNO.kappa[i][a][b] * chem.NO[j];
+	  atmos.kappa_nu[i][j] += opacNO.kappa[i][a][b]; //* chem.NO[j];
       }
     };
     printf("Read NO Opacity done\n");	     //Confirmation message
@@ -926,7 +926,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacNO2.kappa[i][a][b] * chem.NO2[j];
+	  atmos.kappa_nu[i][j] += opacNO2.kappa[i][a][b]; //* chem.NO2[j];
       }
     };
     printf("Read NO2 Opacity done\n");	     //Confirmation message
@@ -962,7 +962,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacOCS.kappa[i][a][b] * chem.OCS[j];
+	  atmos.kappa_nu[i][j] += opacOCS.kappa[i][a][b]; //* chem.OCS[j];
       }
     };
     printf("Read OCS Opacity done\n");	     //Confirmation message
@@ -998,7 +998,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacOH.kappa[i][a][b] * chem.OH[j];
+	  atmos.kappa_nu[i][j] += opacOH.kappa[i][a][b]; //* chem.OH[j];
       }
     };
     printf("Read OH Opacity done\n");	     //Confirmation message
@@ -1034,7 +1034,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacPH3.kappa[i][a][b] * chem.PH3[j];
+	  atmos.kappa_nu[i][j] += opacPH3.kappa[i][a][b]; //* chem.PH3[j];
       }
     };
     printf("Read PH3 Opacity done\n");	     //Confirmation message
@@ -1070,7 +1070,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacSH.kappa[i][a][b] * chem.SH[j];
+	  atmos.kappa_nu[i][j] += opacSH.kappa[i][a][b]; //* chem.SH[j];
       }
     };
     printf("Read SH Opacity done\n");	     //Confirmation message
@@ -1106,7 +1106,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacSiH.kappa[i][a][b] * chem.SiH[j];
+	  atmos.kappa_nu[i][j] += opacSiH.kappa[i][a][b]; //* chem.SiH[j];
       }
     };
     printf("Read SiH Opacity done\n");	     //Confirmation message
@@ -1142,7 +1142,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacSiO.kappa[i][a][b] * chem.SiO[j];
+	  atmos.kappa_nu[i][j] += opacSiO.kappa[i][a][b]; //* chem.SiO[j];
       }
     };
     printf("Read SiO Opacity done\n");	     //Confirmation message
@@ -1178,7 +1178,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacSO2.kappa[i][a][b] * chem.SO2[j];
+	  atmos.kappa_nu[i][j] += opacSO2.kappa[i][a][b]; //* chem.SO2[j];
       }
     };
     printf("Read SO2 Opacity done\n");	     //Confirmation message
@@ -1214,7 +1214,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacTiO.kappa[i][a][b] * chem.TiO[j];
+	  atmos.kappa_nu[i][j] += opacTiO.kappa[i][a][b]; //* chem.TiO[j];
       }
     };
     printf("Read TiO Opacity done\n");	     //Confirmation message
@@ -1250,7 +1250,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacVO.kappa[i][a][b] * chem.VO[j];
+	  atmos.kappa_nu[i][j] += opacVO.kappa[i][a][b]; //* chem.VO[j];
       }
     };
     printf("Read VO Opacity done\n");	     //Confirmation message
@@ -1288,7 +1288,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacNa.kappa[i][a][b] * chem.Na[j];
+	  atmos.kappa_nu[i][j] += opacNa.kappa[i][a][b]; //* chem.Na[j];
       }
     };
     printf("Read Na Opacity done\n");	     //Confirmation message
@@ -1324,7 +1324,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacK.kappa[i][a][b] * chem.K[j];
+	  atmos.kappa_nu[i][j] += opacK.kappa[i][a][b]; //* chem.K[j];
       }
     };
     printf("Read K Opacity done\n");	     //Confirmation message
@@ -1411,7 +1411,7 @@ void TotalOpac() {
           };
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCIA.kappa[i][a][b] * chem.K[j];
+	  atmos.kappa_nu[i][j] += opacCIA.kappa[i][a][b];
       }
     };
     
@@ -1442,7 +1442,7 @@ void TotalOpac() {
     /* Fill in scattering coefficients */
     for (i=0; i<NLAMBDA; i++) {
       for (j=0; j<NPRESSURE; j++) {
-          for (k=0; k<NTEMP; k++) {
+          k=0;
 	  /* Add Rayleigh scattering polarizability to overall kappa */
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
@@ -1526,8 +1526,7 @@ void TotalOpac() {
 	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j]);
 	  
 	  opacscat.kappa[i][j][k] *= RAYLEIGH;
-	  opac.kappa[i][j][k] += opacscat.kappa[i][j][k];
-	}
+	  atmos.kappa_nu[i][j] += opacscat.kappa[i][j][k];
       }
     }
     

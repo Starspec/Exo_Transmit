@@ -276,7 +276,7 @@ void TotalOpac() {
           //};
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCH4.kappa[i][a][b] * chem.CH4[j];
+	  atmos.kappa_nu[i][j] += opacCH4.kappa[i][a][b]; //* chem.CH4[j];
       }
     };
     printf("Read CH4 Opacity done\n");	     //Confirmation message
@@ -1069,7 +1069,7 @@ void TotalOpac() {
           };
 
 	  /* Add to overall opac.kappa */
-	  atmos.kappa_nu[i][j] += opacCIA.kappa[i][a][b] * chem.K[j];
+	  atmos.kappa_nu[i][j] += opacCIA.kappa[i][a][b];
       }
     };
     
@@ -1100,7 +1100,7 @@ void TotalOpac() {
     /* Fill in scattering coefficients */
     for (i=0; i<NLAMBDA; i++) {
       for (j=0; j<NPRESSURE; j++) {
-          for (k=0; k<NTEMP; k++) {
+          k=0;
 	  /* Add Rayleigh scattering polarizability to overall kappa */
 	  opacscat.kappa[i][j][k] +=
 	    (8.0*PI/3.0) * SQ(0.80e-30) *
@@ -1184,8 +1184,7 @@ void TotalOpac() {
 	    chem.PH3[j]*chem.P[j] / (KBOLTZMANN * chem.T[j]);
 	  
 	  opacscat.kappa[i][j][k] *= RAYLEIGH;
-	  opac.kappa[i][j][k] += opacscat.kappa[i][j][k];
-	}
+	  atmos.kappa_nu[i][j] += opacscat.kappa[i][j][k];
       }
     }
     
