@@ -87,6 +87,10 @@ int RT_Transmit()
   /*   Fill in kappa_nu, dtau_nu,  and ds */
   
   R = 0.0;
+
+  // Grab the layer ~ 1 mbar --- Teal
+  int i_mbar;
+  Locate(NTAU, atmos.P, 1e-3, &i_mbar);
   
   for(j=0; j<NTAU; j++){
     
@@ -103,8 +107,21 @@ int RT_Transmit()
     for(i=0; i<NLAMBDA; i++){
       dtau_nu[i][j] = atmos.kappa_nu[i][j] * ds[j];
     }
+    
+    // Write file with opacity at P ~ 1 mbar --- Teal
+    if (j == i_mbar) {
+        // Write out a file with wavelength-dependent opacities at this layer
+        FILE *test_file;
+        test_file = fopen("test_opacities.dat", "w");
+
+        fprintf(test_file, "Wavelength (m)\t Kappa_nu (m^2/kg)\n");
+
+        for (i=0; i<NLAMBDA; i++)
+            fprintf(test_file, "%e\t%e\n", atmos.lambda[i], atmos.kappa_nu[i][j]);
+
+        fclose(test_file);
+    };
   }
-  printf("M A D E I T H E R E!!!\n");
   
   /*   Allocate memory and fill in tau_nu */
   
@@ -120,7 +137,7 @@ int RT_Transmit()
   
   /*   Calculate line-of-sight optical depths along NTAU rays.  Uses the
        routines found in geometry.c */
-  Tau_LOS(kappa_nu, tau_tr, ds, NTAU, R_PLANET, NLAMBDA);
+  Tau_LOS(atmos.kappa_nu, tau_tr, ds, NTAU, R_PLANET, NLAMBDA);
   
   Angles(ds, theta, dtheta, NTAU, R_PLANET, R_STAR);
   

@@ -48,11 +48,9 @@ void ReadChemTable() {
   char **fileArray = getFileArray();
   vars variables = getVars();
   getChemSelection(chemSelection);
-  int NTEMP = variables.NTEMP;
-  int NPRESSURE = variables.NPRESSURE;
   int NTAU = variables.NTAU;
   
-  printf("NTEMP: %d, NPRESSURE: %d, NTAU: %d\n", NTEMP, NPRESSURE, NTAU);		
+  printf("NTAU = %d\n", NTAU);
   
   FILE *f1;
   
