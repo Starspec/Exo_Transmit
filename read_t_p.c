@@ -67,7 +67,7 @@ void ReadTP()
   atmos.T = dvector(0, NTAU-1);
   atmos.mu = dvector(0, NTAU-1);
   
-  file = fopen(fileArray[0], "r");						
+  file = fopen(fileArray[1], "r");						
   if(file == NULL){
     printf("\nread_t_p.c:\nError opening file %s: No such file or directory\n\n",
             fileArray[0]);
@@ -87,13 +87,25 @@ void ReadTP()
     printf("Skipped first line with a buffer.\n");
   };
 
-  for (i=0; i<NTAU; i++){
-    fscanf(file, "%d %le %le", &num[i],  &atmos.P[i], &atmos.T[i]);
+  { // Scope for integer of non-whitespace values we want
+    char _dum[1000];
+    for (i=0; i<NTAU; i++){
+      /* Skips to the end of the line after reading in the first two values
+       * we really want and puts those two values into the appropriate
+       * variables */
+      fscanf(file, "%le %le %[^\n]", &atmos.P[i], &atmos.T[i], &_dum);
+    };
+
+    printf("num: %d psurf: %1e  tsurf:%1e\n", num[0],  atmos.P[0], atmos.T[0]);
+    fclose(file);
+    printf("%s\n", fileArray[1]);
+    printf("%d\n", NTAU);
+    for (i=0; i<NTAU; i++) {
+        printf("%1e %1e\n", atmos.P[i], atmos.T[i]);
+    };
   }
-  printf("num: %d psurf: %1e  tsurf:%1e\n", num[0],  atmos.P[0], atmos.T[0]);
-  fclose(file);
-  printf("%s\n", fileArray[0]);
-  printf("%d\n", NTAU);
+
+  //exit(0);
 
   /* Determine mean molecular weight at each altitude */
 //
