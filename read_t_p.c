@@ -49,115 +49,120 @@ void ReadTP()
   /* Get relevant variables */
   char **fileArray = getFileArray();	
   vars variables = getVars();
-  getNTau(&variables, fileArray[1]);
+  getNTau(&variables, fileArray[0]);
   
   /* Rename for convenience */
-  int NTEMP = variables.NTEMP; 
-  int NPRESSURE = variables.NPRESSURE;
   int NTAU = variables.NTAU;
   int THRESHOLD = variables.THRESHOLD;
   
-  int i, j, k, num[NTAU];
-  char dum[7];
+  int i;
+  char dum[9];
   FILE *file;
+
+  /* Molecular masses */
+  /* Masses sourced from http://www.webqc.org/mmcalc.php */
+  
+  double m_H2 = 2.0158;
+  double m_H = 1.0079;
+  double m_H2O = 18.0152;
+  double m_CH4 = 16.0423;
+  double m_CO = 28.010;
+  double m_CO2 = 44.010;
+  double m_O = 15.9994;
+  double m_C = 12.0107;
+  double m_N = 14.0067;
+  double m_NH3 = 17.031;
+  double m_N2 = 28.0134;
+  double m_O2 = 31.9988;
+  double m_O3 = 47.9982;
+  double m_C2H2 = 26.0373;
+  double m_C2H4 = 28.0532;
+  double m_C2H6 = 30.0690;
+  double m_H2CO = 30.0260;
+  double m_H2S = 34.0809;
+  double m_HCN = 27.0253;
+  double m_NO = 30.0061;
+  double m_NO2 = 46.00550;
+  double m_OCS = 60.0751;
+  double m_OH = 17.0073;
+  double m_SO2 = 64.0638;
   
   /* Allocate memory for atmos structure */
   
   atmos.P = dvector(0, NTAU-1);
   atmos.T = dvector(0, NTAU-1);
   atmos.mu = dvector(0, NTAU-1);
+
+  atmos.H = dvector(0, NTAU-1);
+  atmos.H2O = dvector(0, NTAU-1);
+  atmos.OH = dvector(0, NTAU-1);
+  atmos.O = dvector(0, NTAU-1);
+  atmos.O2 = dvector(0, NTAU-1);
+  atmos.O3 = dvector(0, NTAU-1);
+  atmos.CO = dvector(0, NTAU-1);
+  atmos.CO2 = dvector(0, NTAU-1);
+  atmos.C = dvector(0, NTAU-1);
+  atmos.CH4 = dvector(0, NTAU-1);
+  atmos.C2H2 = dvector(0, NTAU-1);
+  atmos.H2CO = dvector(0, NTAU-1);
+  atmos.N = dvector(0, NTAU-1);
+  atmos.N2 = dvector(0, NTAU-1);
+  atmos.NO = dvector(0, NTAU-1);
+  atmos.NO2 = dvector(0, NTAU-1);
+  atmos.NH3 = dvector(0, NTAU-1);
+  atmos.HCN = dvector(0, NTAU-1);
+  atmos.H2S = dvector(0, NTAU-1);
+  atmos.SO2 = dvector(0, NTAU-1);
+  atmos.OCS = dvector(0, NTAU-1);
+  atmos.C2H4 = dvector(0, NTAU-1);
+  atmos.C2H6 = dvector(0, NTAU-1);
+  atmos.H2 = dvector(0, NTAU-1);
   
-  file = fopen(fileArray[1], "r");						
+  
+  file = fopen(fileArray[0], "r");						
   if(file == NULL){
-    printf("\nread_t_p.c:\nError opening file %s: No such file or directory\n\n",
-            fileArray[0]);
+    printf("\nread_t_p.c:\nError opening file: No such file or directory\n\n");
     exit(1);
-  };
-  
-  /* Read in T-P profile
-   * With Teal's update, this is going to be the same file that is read in
-   * with the vertical chemical profiles. No point in having two files. */
-
-  {
-    /* Skip the first line */
-    // This must be longer than the first line, so making it unreasonably long
-    int _line = 1000;
-    char _buffer[_line]; 
-    fgets(_buffer, _line, file);
-    printf("Skipped first line with a buffer.\n");
-  };
-
-  { // Scope for integer of non-whitespace values we want
-    char _dum[1000];
-    for (i=0; i<NTAU; i++){
-      /* Skips to the end of the line after reading in the first two values
-       * we really want and puts those two values into the appropriate
-       * variables */
-      fscanf(file, "%le %le %[^\n]", &atmos.P[i], &atmos.T[i], &_dum);
-    };
-
-    printf("num: %d psurf: %1e  tsurf:%1e\n", num[0],  atmos.P[0], atmos.T[0]);
-    fclose(file);
-    printf("%s\n", fileArray[1]);
-    printf("%d\n", NTAU);
-    for (i=0; i<NTAU; i++) {
-        printf("%1e %1e\n", atmos.P[i], atmos.T[i]);
-    };
   }
+  
+  /* Read in T-P profile */
 
-  //exit(0);
-
+  fscanf(file, "%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s", dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum, dum);
+  for (i=0; i<NTAU; i++){
+    fscanf(file, "%le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le %le", &atmos.P[i], &atmos.T[i], &atmos.C[i], &atmos.CH4[i], &atmos.CO[i], &atmos.OCS[i], &atmos.CO2[i], &atmos.C2H2[i], &atmos.C2H4[i], &atmos.C2H6[i], &atmos.H[i], &atmos.HCN[i], &atmos.H2[i], &atmos.H2CO[i], &atmos.H2O[i], &atmos.H2S[i], &atmos.N[i], &atmos.N2[i], &atmos.NO2[i], &atmos.NH3[i], &atmos.NO[i], &atmos.O[i], &atmos.O2[i], &atmos.O3[i], &atmos.OH[i], &atmos.SO2[i]);
+  }
+  fclose(file);
+  
   /* Determine mean molecular weight at each altitude */
-//
-//  /* Interpolation variables */
-//  int x1,x2,y1,y2;
-//  double t1,t2,t,p1,p2,p,z1,z2,z3,z4;
-//  for (i=0;i<NTAU;i++){ 			
-//    
-//    /* locate temperature on grid */    
-//    j = 0;
-//    while((atmos.T[i] > chem.T[j]) && (atmos.T[i] > chem.T[j+1]) 
-//	  && (j <= (NTEMP-1)))     
-//      j++;
-//    if (j > (NTEMP-1))
-//      printf("Tempearature not found on grid\n");
-//    else{
-//      /* set interpolation points*/
-//      x1 = j;
-//      x2 = j+1;
-//      t1 = chem.T[j]; 
-//      t2 = chem.T[j+1];
-//      t = atmos.T[i];
-//    }
-//    
-//    /* locate pressure on grid */
-//    k=0;
-//    while((atmos.P[i] > chem.P[k]) && (atmos.P[i] >= chem.P[k+1]) 
-//	  && (k <= (NPRESSURE-1)))
-//      k++;
-//    if (k > (NPRESSURE-1))
-//      printf("Pressure not found on grid\n");
-//    else{
-//      /* set interpolation points*/
-//      y1 =k;
-//      y2 = k+1;
-//      p1 = chem.P[y1]; 
-//      p2 = chem.P[y2];
-//      p = atmos.P[i];
-//    }
-//    
-//    /* weighted atmospheric mass at (p1,t1) (p1,t2) (p2,t1) (p2,t2) */
-//    z1 = chem.mu[y1][x1];
-//    z2 = chem.mu[y1][x2];
-//    z3 = chem.mu[y2][x1];
-//    z4 = chem.mu[y2][x2];
-//    
-//    /* linear interpolate */
-//    atmos.mu[i] = lint2D(t1,t2,p1,p2,z1,z2,z3,z4,t,p);
-//  }
-   // Mu is now read in with readchemtable.c, since it is not needed until
-   // after then.
-
+  
+  for (i=0;i<NTAU;i++){ 			
+    
+    atmos.mu[i] = 
+      atmos.H[i] * m_H +
+      atmos.H2O[i] * m_H2O +
+      atmos.OH[i] * m_OH +
+      atmos.O[i] * m_O +
+      atmos.O2[i] * m_O2 +
+      atmos.O3[i] * m_O3 +
+      atmos.CO[i] * m_CO +
+      atmos.CO2[i] * m_CO2 +
+      atmos.C[i] * m_C +
+      atmos.CH4[i] * m_CH4 +
+      atmos.C2H2[i] * m_C2H2 +
+      atmos.H2CO[i] * m_H2CO +
+      atmos.N[i] * m_N +
+      atmos.N2[i] * m_N2 +
+      atmos.NO[i] * m_NO +
+      atmos.NO2[i] * m_NO2 +
+      atmos.NH3[i] * m_NH3 +
+      atmos.HCN[i] * m_HCN +
+      atmos.H2S[i] * m_H2S +
+      atmos.SO2[i] * m_SO2 +
+      atmos.OCS[i] * m_OCS +
+      atmos.C2H4[i] * m_C2H4 +
+      atmos.C2H6[i] * m_C2H6 +
+      atmos.H2[i] * m_H2;
+  }
   
   /* Cloud layer calculation */
 
@@ -172,7 +177,33 @@ void ReadTP()
   }
   
   
-  printf("%d\t%e\t%e\n", num[NTAU-1], atmos.P[NTAU-1], atmos.T[NTAU-1]);
+  printf("Last line of T-P profile:\n");
+  printf("T:\t%e Pa\n", atmos.T[NTAU-1]);
+  printf("P:\t%f K\n", atmos.P[NTAU-1]);
+  printf("C:\t%e\n", atmos.C[NTAU-1]);
+  printf("CH4:\t%e\n", atmos.CH4[NTAU-1]);
+  printf("CO:\t%e\n", atmos.CO[NTAU-1]);
+  printf("OCS:\t%e\n", atmos.OCS[NTAU-1]);
+  printf("CO2:\t%e\n", atmos.CO2[NTAU-1]);
+  printf("C2H2:\t%e\n", atmos.C2H2[NTAU-1]);
+  printf("C2H4:\t%e\n", atmos.C2H4[NTAU-1]);
+  printf("C2H6:\t%e\n", atmos.C2H6[NTAU-1]);
+  printf("H:\t%e\n", atmos.H[NTAU-1]);
+  printf("HCN:\t%e\n", atmos.HCN[NTAU-1]);
+  printf("H2:\t%e\n", atmos.H2[NTAU-1]);
+  printf("H2CO:\t%e\n", atmos.H2CO[NTAU-1]);
+  printf("H2O:\t%e\n", atmos.H2O[NTAU-1]);
+  printf("H2S:\t%e\n", atmos.H2S[NTAU-1]);
+  printf("N:\t%e\n", atmos.N[NTAU-1]);
+  printf("N2:\t%e\n", atmos.N2[NTAU-1]);
+  printf("NO2:\t%e\n", atmos.NO2[NTAU-1]);
+  printf("NH3:\t%e\n", atmos.NH3[NTAU-1]);
+  printf("NO:\t%e\n", atmos.NO[NTAU-1]);
+  printf("O:\t%e\n", atmos.O[NTAU-1]);
+  printf("O2:\t%e\n", atmos.O2[NTAU-1]);
+  printf("O3:\t%e\n", atmos.O3[NTAU-1]);
+  printf("OH:\t%e\n", atmos.OH[NTAU-1]);
+  printf("SO2:\t%e\n", atmos.SO2[NTAU-1]);
     
 }
 
