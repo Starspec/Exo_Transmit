@@ -8,7 +8,8 @@ CC = cc
 
 # Set compilation flags
 #   -ansi (check syntax against the American National Standard for C
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I/usr/include/tirpc #-Wall -g -c  totalopac.c
+
 
 #----------------------------------------------------------------------------
 # build rules:
