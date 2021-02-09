@@ -51,6 +51,11 @@ int main()
   RT_Transmit();
   printf("Exo_Transmit done\n");
 
+  FreeTP();
+  FreeOpacTable(opac);
+  FreeChemTable(chem);
+
+
   return 0;
 }
 

@@ -76,23 +76,29 @@ void ReadOpacTable(struct Opac opac, char *filename) {
   }
   
   for (i=0; i<NLAMBDA; i++) {
-    fscanf(f1,"%le", &atmos.lambda[i]);
-	
+    fscanf(f1, "%le", &atmos.lambda[i]);
+
     for (j=0; j<opac.NP; j++) {
-      fscanf(f1,"%le", &junk);
-	  	  
-      for (k=0; k<opac.NT; k++) {
-		  fscanf(f1,"%le", &opac.kappa[i][j][k]);
-	
-	/*   kappa in file is actually cross section, sigma.  
-	     Need to multiply by number density.  Will weight by 
-	     abundance in totalopac.c.  */
-	
-	opac.kappa[i][j][k] *= opac.P[j] / (KBOLTZMANN * opac.T[k]);
-	
+          fscanf(f1,"%le", &junk);
+        
+        for (k=0; k<opac.NT; k++) {
+    	  	  
+    	fscanf(f1,"%le", &opac.kappa[i][j][k]);
+    	
+    	/*   kappa in file is actually cross section, sigma.  
+    	 *   Need to multiply by number density 
+         *   (this now happens in totalopac.c for vertical profiles. */
+
+            //printf("opac.abundance = %e\n opac.P = %e\n opac.T = %e\n Step: %d, %d, %d\n",
+            //        opac.abundance[j], opac.P[j], opac.T[k], i, j, k);
+    	
+        /* Not that this is now just sigma * density, not number density, kappa
+         * retained for convenience until release. */
+    	opac.kappa[i][j][k] *= opac.P[j] / (KBOLTZMANN * opac.T[k]);
+    	
       }
     }
-  }
+  };
   
   fclose(f1);
   printf("opac %e %e %e\n", atmos.lambda[NLAMBDA-1], opac.P[0], opac.T[0]);
@@ -114,7 +120,7 @@ void FreeOpacTable(struct Opac opac)
   free_dvector(opac.T, 0, NTEMP-1);
   free_dvector(opac.P, 0, NPRESSURE-1);
   free_dvector(opac.Plog10, 0, NPRESSURE-1);
-  free_dmatrix(opac.abundance, 0, NPRESSURE-1, 0, NTEMP-1);
+  //free_dvector(opac.abundance, 0, NTAU-1);
   free_d3tensor(opac.kappa, 0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
 
 }

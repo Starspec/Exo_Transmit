@@ -294,7 +294,7 @@ void TotalOpac() {
     opacCO2.Plog10 = dvector(0, NPRESSURE-1);
     opacCO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
     
-    ReadOpacTable(opacCO2, fileArray[8]);     //Read opacity table for CO2
+    ReadOpacTable(opacCO2, fileArray[3]);     //Read opacity table for CO2
     
     /* Populate atmos.kappa_nu */
     for (i=0; i<NLAMBDA; i++){
@@ -1055,55 +1055,48 @@ void TotalOpac() {
           Locate(NTEMP, opacCIA.T, atmos.T[j], &a);
           Locate(NPRESSURE, opacCIA.P, atmos.P[j], &b);
 
-    for (i=0; i<NLAMBDA; i++){
-      for (j=0; j<NTAU; j++){
-          Locate(NTEMP, opacCIA.T, atmos.T[j], &a);
-          Locate(NPRESSURE, opacCIA.P, atmos.P[j], &b);
-
           atmos.kappa_nu[i][j] += opac_CIA_H2H2[a][i] * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_H2He[a][i] * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.He[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.He[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_H2H[a][i] * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.H[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.H[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_H2CH4[a][i] * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.CH4[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.CH4[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           /* atmos.kappa_nu[i][j] += opac_CIA_CH4Ar[a][i] *  */
-          /*   chem.CH4[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) *  */
-          /*   chem.Ar[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]); */
+          /*   chem.CH4[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) *  */
+          /*   chem.Ar[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]); */
           atmos.kappa_nu[i][j] += opac_CIA_CH4CH4[a][i] * 
-            chem.CH4[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.CH4[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.CH4[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.CH4[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_CO2CO2[a][i] * 
-            chem.CO2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.CO2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.CO2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.CO2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_HeH[a][i] * 
-            chem.He[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.H[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.He[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.H[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_N2CH4[a][i] * 
-            chem.N2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.CH4[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.N2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.CH4[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_N2H2[a][i] * 
-            chem.N2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.H2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.N2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.H2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_N2N2[a][i] * 
-            chem.N2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.N2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.N2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.N2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_O2CO2[a][i] * 
-            chem.O2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.CO2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.O2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.CO2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_O2N2[a][i] * 
-            chem.O2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.N2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
+            chem.O2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.N2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
           atmos.kappa_nu[i][j] += opac_CIA_O2O2[a][i] * 
-            chem.O2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]) * 
-            chem.O2[j] * opac.P[b] / (KBOLTZMANN * opac.T[a]);
-      }
-    }
+            chem.O2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]) * 
+            chem.O2[j] * atmos.P[j] / (KBOLTZMANN * opac.T[a]);
       }
     }
     

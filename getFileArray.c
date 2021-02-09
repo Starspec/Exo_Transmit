@@ -48,7 +48,7 @@ char** getFileArray(){
   
   /* Get data from input files */
   
-  int contentLines[3] = {6,8,10};  // 6,8,10 are data containing lines in 'userInput.in'
+  int contentLines[3] = {6,8,10};  // 6,8 are data containing lines in 'userInput.in'
   
   input = fopen(input_filename, "r"); //open stream
   
