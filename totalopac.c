@@ -88,12 +88,12 @@ void TotalOpac() {
     **opac_CIA_H2CH4, **opac_CIA_CH4Ar, **opac_CIA_CH4CH4, 
     **opac_CIA_CO2CO2, **opac_CIA_HeH, **opac_CIA_N2CH4, 
     **opac_CIA_N2H2, **opac_CIA_N2N2, **opac_CIA_O2CO2, 
-    **opac_CIA_O2N2, **opac_CIA_O2O2;
+    **opac_CIA_O2N2, **opac_CIA_O2O2, **xsec_haze;
   int i, j, k, ll, a, b;
   
   char **fileArray = getFileArray(); 	//get file names
   vars variables = getVars(); 		//get planet variables
-  int chemSelection[32]; 		//get chemistry selections
+  int chemSelection[33]; 		//get chemistry selections
   
   getChemSelection(chemSelection); 
   
@@ -101,6 +101,7 @@ void TotalOpac() {
   int NPRESSURE = variables.NPRESSURE;
   int NTEMP = variables.NTEMP;
   int NTAU = variables.NTAU;
+  int NRADII = variables.NRADII;
   double RAYLEIGH = variables.RAYLEIGH;
   
   FILE *f1;
@@ -123,11 +124,20 @@ void TotalOpac() {
   opac_CIA_O2CO2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
   opac_CIA_O2N2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
   opac_CIA_O2O2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
+
+  // haze cross-section array -- teal
+  xsec_haze = dmatrix(0, NRADII, 0, NLAMBDA);
   
   //populate with zeros	
   for (i=0; i<NLAMBDA; i++)
     for (ll=0; ll<NTAU; ll++)
       atmos.kappa[i][ll] = 0.;
+
+  /* Fill in haze opacities */
+  if (chemSelection[32] == 1){
+      printf("Haze has been selected as an input!\n");
+
+  };
   
   /* Fill in CH4 opacities */
   if(chemSelection[0] == 1){          //If CH4 is selected
@@ -1064,6 +1074,7 @@ void TotalOpac() {
   free_dmatrix(opac_CIA_O2CO2, 0, NTEMP-1, 0, NLAMBDA-1);
   free_dmatrix(opac_CIA_O2N2, 0, NTEMP-1, 0, NLAMBDA-1);
   free_dmatrix(opac_CIA_O2O2, 0, NTEMP-1, 0, NLAMBDA-1);
+  free_dmatrix(xsec_haze, 0, NRADII-1, 0 , NLAMBDA-1);
 
   printf("\n\n***********\nWARNING:  Double check that T-P profile lies within T and P range covered by the opacity data tables!!\n***********\n\n");
   

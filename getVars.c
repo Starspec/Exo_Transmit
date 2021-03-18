@@ -114,6 +114,10 @@ vars getVars(){
 	vars.NTAU = strtol(line, NULL, 10);
 	lineCount++;
 	break;
+      case 50:
+        vars.NRADII = strtol(line, NULL, 10);
+        lineCount++;
+        break;
       default:
 	lineCount++;
 	break;
