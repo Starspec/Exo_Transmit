@@ -35,15 +35,15 @@ Collision Induced Opacity files on the next line:
 /Opac/opacCIA.dat
 Constant variables should be on the following lines:
 On lines 38 through 40, write the number of temp points in the TP grid (line 38) along with the minimum (39) and maximum (40) (in K) values
-200            
-100.
-500.
+30             
+100.0            
+3000.0
 On lines 42 through 44, write the number of pressure points in the TP grid (42) along with the minimum (43) and maximum (44) (in Pa) values.
-200      
-4.0e-02
-1.0e+04
+13       
+1.0e-04
+1.0e+08
 On line 46 write the number of wavelength points in the grid:
 4616
 On line 48 write the number of optical depth points:
-334
+200
 End of otherInput.c (Do not change this line!)
