@@ -45,7 +45,7 @@ void getChemSelection(int array[]){
   if(input){
     char line[256];
     while(fgets(line, sizeof(line), input) != NULL){
-      if(lineCount >= 2 && lineCount < 34){
+      if(lineCount >= 2 && lineCount < 35){
 	int index = 0;
 	while(line[index] != '\n'){
 	  if(line[index] == '1' || line[index] == '0')

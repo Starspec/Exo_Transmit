@@ -43,7 +43,7 @@ char** getFileArray(){
   char input_filename [30] = "userInput.in"; // Input file Name for the program
   char opac_filename [30] = "otherInput.in"; // Input file with opacity data
   
-  FILE *input; //File pointer varible
+  FILE *input; //File pointer variable
   
   
   /* Get data from input files */

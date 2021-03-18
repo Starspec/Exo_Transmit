@@ -88,7 +88,7 @@ void TotalOpac() {
     **opac_CIA_H2CH4, **opac_CIA_CH4Ar, **opac_CIA_CH4CH4, 
     **opac_CIA_CO2CO2, **opac_CIA_HeH, **opac_CIA_N2CH4, 
     **opac_CIA_N2H2, **opac_CIA_N2N2, **opac_CIA_O2CO2, 
-    **opac_CIA_O2N2, **opac_CIA_O2O2, **xsec_haze;
+    **opac_CIA_O2N2, **opac_CIA_O2O2;
   int i, j, k, ll, a, b;
   
   char **fileArray = getFileArray(); 	//get file names
@@ -125,17 +125,88 @@ void TotalOpac() {
   opac_CIA_O2N2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
   opac_CIA_O2O2 = dmatrix(0, NTEMP-1, 0, NLAMBDA-1);
 
-  // haze cross-section array -- teal
-  xsec_haze = dmatrix(0, NRADII, 0, NLAMBDA);
-  
   //populate with zeros	
   for (i=0; i<NLAMBDA; i++)
     for (ll=0; ll<NTAU; ll++)
       atmos.kappa[i][ll] = 0.;
 
+  // haze cross-section array -- teal
+  double **xsec_haze, *xsec_wl, *xsec_radii;
+  char junk;
+  xsec_haze = dmatrix(0, NRADII, 0, NLAMBDA);
+  xsec_wl = dvector(0, NLAMBDA);
+  xsec_radii = dvector(0, NRADII);
+
   /* Fill in haze opacities */
   if (chemSelection[32] == 1){
       printf("Haze has been selected as an input!\n");
+      
+      FILE *f1 = fopen("haze_opac/haze_opacities.dat", "r");
+      
+      printf("Haze file has been opened!\n");
+
+      for (int j=0; j<NLAMBDA+3; j++) {
+          if (j < 2) {
+              // Skip header lines
+              printf("Skipping heeader line...\n");
+              fscanf(f1, "%*[^\n]\n");
+              printf("Skipped header line %1d\n", j+1);
+          } else if (j == 2) {
+              // Column header line; wl + radii
+              for (k=0; k<NRADII+1; k++) {
+                  if (k == 0) {
+                      printf("Skipping wl...");
+                      fscanf(f1, "%s", &junk);
+                      printf("done!\n");
+
+                      continue;
+                  } else {
+                      printf("Reading in radius: ");
+                      fscanf(f1, "%le", &xsec_radii[k-1]);
+                      printf("%.8e \n", xsec_radii[k-1]);
+                  };
+              };
+          } else {
+              // Normal columns by wavelength
+              for (k=0; k<NLAMBDA; k++) {
+                  for (j=0; j<NRADII+1; k++) {
+                    if (j == 0) {
+                        fscanf(f1, "%le", &xsec_wl[k]);
+                    } else {
+                        fscanf(f1, "%le", &xsec_haze[j-1][k]);
+                    };
+                  }
+              }
+          };
+
+
+      }
+
+      /*
+      // Skip the first three header lines
+      for (k=0; k<3; k++) {
+      };
+
+      // Get the radii
+      for (int k=0; k<NRADII+1; k++) {
+        // First column is the wavelength and the radii
+        if (k == 0) {
+            printf("Skipping wl...");
+            fscanf(f1, "%s", &junk);
+            printf("done!\n");
+
+            continue;
+        } else {
+            printf("Reading in radius\n");
+            fscanf(f1, "%f", &xsec_radii[k]);
+            printf("%f \n", xsec_radii[k-1]);
+        };
+      }
+      */
+
+      printf("Radii have been imported!\n");
+      fclose(f1);
+      exit(0);
 
   };
   
