@@ -8,7 +8,7 @@ CC = cc
 
 # Set compilation flags
 #   -ansi (check syntax against the American National Standard for C
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I/usr/include/tirpc
 
 #----------------------------------------------------------------------------
 # build rules:
@@ -27,7 +27,7 @@ all: Exo_Transmit
 
 #<<<<<<< HEAD
 Exo_Transmit: main_transmission.o readopactable.o totalopac.o readchemtable.o read_t_p.o rt_transmission.o nrutil.o utils.o interpol.o planck.o geometry.o getFileArray.o getVars.o getNTau.o getChemSelection.o
-	$(CC) -o Exo_Transmit  main_transmission.o readopactable.o totalopac.o readchemtable.o read_t_p.o rt_transmission.o nrutil.o utils.o interpol.o planck.o geometry.o getFileArray.o getVars.o getNTau.o getChemSelection.o -lm
+	$(CC) -o Exo_Transmit  main_transmission.o readopactable.o totalopac.o readchemtable.o read_t_p.o rt_transmission.o nrutil.o utils.o interpol.o planck.o geometry.o getFileArray.o getVars.o getNTau.o getChemSelection.o -lm -ltirpc
 #=======
 
 main_transmission.o: main_transmission.c opac.h atmos.h prototypes.h 

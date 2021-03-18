@@ -28,17 +28,17 @@ Author: Eliza Kempton (kemptone@grinnell.edu)
 struct Opac { 
 	char* name;
   int NP, NT;
-  double ***kappa, *abundance;
+  double ***kappa, **abundance;
   double *P, *Plog10, *T;
 };
 
 /* --- Chemistry structure ------------------------------------------ */
 
 struct Chem {
-  double *total, *C, *CH4, *CO, *CO2, *C2H2, *C2H4, *C2H6, *H, 
-    *HCN, *HCl, *HF, *H2, *H2CO, *H2O, *H2S, *He, *K, *MgH, 
-    *N, *N2, *NO2, *NH3, *NO, *Na, *O, *O2, *O3, *OH, *OCS, 
-    *PH3, *SH, *SO2, *SiH, *SiO, *TiO, *VO, *mu;
+  double **total, **C, **CH4, **CO, **CO2, **C2H2, **C2H4, **C2H6, **H, 
+    **HCN, **HCl, **HF, **H2, **H2CO, **H2O, **H2S, **He, **K, **MgH, 
+    **N, **N2, **NO2, **NH3, **NO, **Na, **O, **O2, **O3, **OH, **OCS, 
+    **PH3, **SH, **SO2, **SiH, **SiO, **TiO, **VO, **mu;
   double *P, *T;
 };
 

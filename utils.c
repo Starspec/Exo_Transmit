@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <rpc/types.h>
+#include <tirpc/rpc/types.h>
 
 #include "include.h"
 #include "nrutil.h"
