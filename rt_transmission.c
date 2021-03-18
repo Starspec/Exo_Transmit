@@ -39,7 +39,6 @@ Author: Eliza Kempton (kemptone@grinnell.edu)
 /* --- Global variables ------------------------------------------ */
 
 extern struct Atmos atmos;
-extern struct Opac opac;
 
 /* ------- begin ---------------- RT_Transmit -------------------- */
 
@@ -53,14 +52,12 @@ int RT_Transmit()
   double R_PLANET = variables.R_PLANET;
   double R_STAR = variables.R_STAR;
   int NLAMBDA = variables.NLAMBDA;
-  int NTEMP = variables.NTEMP;
-  int NPRESSURE = variables.NPRESSURE;
   double G = variables.G;
 
   double **kappa_nu, **tau_nu, **dtau_nu, **tau_tr;
   double *intensity, *flux_st, *flux_pl, *flux_tr;
   double *ds, *theta, *dtheta, R, t_star;
-  int i, j, a, b;
+  int i, j;
   FILE *file;
   
   /*   Allocate memory */
@@ -77,7 +74,7 @@ int RT_Transmit()
   ds = dvector(0, NTAU-1);
   theta = dvector(0, NTAU-1);
   dtheta = dvector(0, NTAU-1);
-
+  
   /*  Populate tau_tr with zeros */
   
   for (i=0; i<NLAMBDA; i++)
@@ -87,10 +84,6 @@ int RT_Transmit()
   /*   Fill in kappa_nu, dtau_nu,  and ds */
   
   R = 0.0;
-
-  // Grab the layer ~ 1 mbar --- Teal
-  int i_mbar;
-  Locate(NTAU, atmos.P, 1e-3, &i_mbar);
   
   for(j=0; j<NTAU; j++){
     
@@ -104,23 +97,11 @@ int RT_Transmit()
     }
 
     R += ds[j];
-    for(i=0; i<NLAMBDA; i++){
-      dtau_nu[i][j] = atmos.kappa_nu[i][j] * ds[j];
-    }
     
-    // Write file with opacity at P ~ 1 mbar --- Teal
-    if (j == i_mbar) {
-        // Write out a file with wavelength-dependent opacities at this layer
-        FILE *test_file;
-        test_file = fopen("test_opacities.dat", "w");
-
-        fprintf(test_file, "Wavelength (m)\t Kappa_nu (m^2/kg)\n");
-
-        for (i=0; i<NLAMBDA; i++)
-            fprintf(test_file, "%e\t%e\n", atmos.lambda[i], atmos.kappa_nu[i][j]);
-
-        fclose(test_file);
-    };
+    for(i=0; i<NLAMBDA; i++){
+      kappa_nu[i][j] = atmos.kappa[i][j];
+      dtau_nu[i][j] = kappa_nu[i][j] * ds[j];
+    }
   }
   
   /*   Allocate memory and fill in tau_nu */
@@ -137,7 +118,7 @@ int RT_Transmit()
   
   /*   Calculate line-of-sight optical depths along NTAU rays.  Uses the
        routines found in geometry.c */
-  Tau_LOS(atmos.kappa_nu, tau_tr, ds, NTAU, R_PLANET, NLAMBDA);
+  Tau_LOS(kappa_nu, tau_tr, ds, NTAU, R_PLANET, NLAMBDA);
   
   Angles(ds, theta, dtheta, NTAU, R_PLANET, R_STAR);
   
