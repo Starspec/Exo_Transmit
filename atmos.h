@@ -30,7 +30,7 @@ struct Atmos {
   double *lambda, *T, *P, *mu, **kappa;
   double *total, *C, *CH4, *CO, *CO2, *C2H2, *C2H4, *C2H6, *H, 
     *HCN, *H2, *H2CO, *H2O, *H2S, *N, *N2, *NH3, *NO, *NO2, *O, *O2, 
-    *O3, *OH, *OCS, *S, *SO2; 
+    *O3, *OH, *OCS, *S, *SO2;
 
 };
 
