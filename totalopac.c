@@ -206,7 +206,7 @@ void TotalOpac() {
           
           for (i=0; i<NLAMBDA; i++) {
               atmos.kappa[i][ll] += 
-                  haze_ndens[ll] * xsec_haze[a][ll];
+                  haze_ndens[ll] * xsec_haze[a][i];
           };
       };
   };
