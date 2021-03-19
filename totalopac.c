@@ -155,58 +155,32 @@ void TotalOpac() {
               // Column header line; wl + radii
               for (k=0; k<NRADII+1; k++) {
                   if (k == 0) {
-                      printf("Skipping wl...");
                       fscanf(f1, "%s", &junk);
-                      printf("done!\n");
 
                       continue;
                   } else {
-                      printf("Reading in radius: ");
                       fscanf(f1, "%le", &xsec_radii[k-1]);
-                      printf("%.8e \n", xsec_radii[k-1]);
                   };
               };
           } else {
               // Normal columns by wavelength
-              for (k=0; k<NLAMBDA; k++) {
-                  for (j=0; j<NRADII+1; k++) {
-                    if (j == 0) {
-                        fscanf(f1, "%le", &xsec_wl[k]);
+              //for (k=0; k<NLAMBDA; k++) {
+                  for (k=0; k<NRADII+1; k++) {
+                    if (k == 0) {
+                        fscanf(f1, "%le", &xsec_wl[j]);
                     } else {
-                        fscanf(f1, "%le", &xsec_haze[j-1][k]);
+                        fscanf(f1, "%le", &xsec_haze[k][j-3]);
                     };
                   }
-              }
+              //}
           };
 
 
       }
 
-      /*
-      // Skip the first three header lines
-      for (k=0; k<3; k++) {
-      };
-
-      // Get the radii
-      for (int k=0; k<NRADII+1; k++) {
-        // First column is the wavelength and the radii
-        if (k == 0) {
-            printf("Skipping wl...");
-            fscanf(f1, "%s", &junk);
-            printf("done!\n");
-
-            continue;
-        } else {
-            printf("Reading in radius\n");
-            fscanf(f1, "%f", &xsec_radii[k]);
-            printf("%f \n", xsec_radii[k-1]);
-        };
-      }
-      */
-
-      printf("Radii have been imported!\n");
+      printf("Haze cross sections have been imported!\n");
       fclose(f1);
-      exit(0);
+      //exit(0);
 
   };
   
