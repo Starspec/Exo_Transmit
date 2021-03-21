@@ -42,7 +42,7 @@ void ReadChemTable() {
   
   int i, j;
   char dum[8];
-  int chemSelection[30];
+  int chemSelection[32];
   
   /* Initialize and obtain variables from other files */
   char **fileArray = getFileArray();

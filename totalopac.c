@@ -142,8 +142,12 @@ void TotalOpac() {
 
   /* Fill in haze opacities */
   if (chemSelection[32] == 1) {
-      printf("CH4 SET TO %i\n", chemSelection[0]);
       printf("Haze has been selected as an input!\n");
+
+      // Check to see if atmos.lambda needs to be populated
+      int check_lambda = 1;
+
+
       
       FILE *f1 = fopen("haze_opac/haze_opacities.dat", "r");
       
@@ -180,6 +184,13 @@ void TotalOpac() {
           };
 
       }
+
+      // Populate the wavelengths if need be with this wl grid
+      atmos.lambda = dvector(0, NLAMBDA-1);
+      for (i=0; i<NLAMBDA; i++) {
+          atmos.lambda[i] = xsec_wl[i];
+      };
+
       printf("Haze cross sections have been imported!\n");
       fclose(f1);
 
@@ -207,6 +218,7 @@ void TotalOpac() {
           for (i=0; i<NLAMBDA; i++) {
               atmos.kappa[i][ll] += 
                   haze_ndens[ll] * xsec_haze[a][i];
+
           };
       };
   };
