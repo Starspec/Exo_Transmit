@@ -130,10 +130,9 @@ void TotalOpac() {
     for (ll=0; ll<NTAU; ll++)
       atmos.kappa[i][ll] = 0.;
 
-  // haze cross-section array -- teal
+  // Allocating memory for haze calculations
   double **xsec_haze, *xsec_wl, *xsec_radii;
   double *haze_ndens, *haze_radii;
-  char *junk;
   xsec_haze = dmatrix(0, NRADII-1, 0, NLAMBDA-1);
   xsec_wl = dvector(0, NLAMBDA-1);
   xsec_radii = dvector(0, NRADII-1);
@@ -144,30 +143,27 @@ void TotalOpac() {
   if (chemSelection[32] == 1) {
       printf("Haze has been selected as an input!\n");
 
-      // Check to see if atmos.lambda needs to be populated
-      int check_lambda = 1;
-
-
-      
       FILE *f1 = fopen("haze_opac/haze_opacities.dat", "r");
+
+      if(f1 == NULL){
+        printf("Haze xsection file was not found. Please make sure the proper "
+               "cross sections file exists in the haze_opac folder.");
+        exit(1);
+      };
       
       printf("Haze file has been opened!\n");
 
       for (int j=0; j<NLAMBDA+3; j++) {
           if (j < 2) {
-            printf("CH4 SET TO %i\n", chemSelection[0]);
               // Skip header lines
-              printf("Skipping heeader line...\n");
               fscanf(f1, "%*[^\n]\n");
-              printf("Skipped header line %1d\n", j+1);
           } else if (j == 2) {
               // Column header line; wl + radii
               for (k=0; k<NRADII+1; k++) {
                   if (k == 0) {
-                      fscanf(f1, "%s", &junk);
-              printf("CH4 SET TO %i\n", chemSelection[0]);
-
+                      fscanf(f1, "%*s");//, &junk);
                       continue;
+
                   } else {
                       fscanf(f1, "%le", &xsec_radii[k-1]);
                   };
@@ -197,14 +193,12 @@ void TotalOpac() {
       // The cross sections are now read in, read in the haze number density
       // and effective sphere radius (what is used in the fractal code and the
       // radiative transfer.
-      f1 = fopen("haze_input/haze.dat", "r");
+      f1 = fopen(fileArray[35], "r");
       fscanf(f1, "%*[^\n]\n");
 
       for (k=0; k<NTAU; k++) {
           fscanf(f1, "%le", &haze_radii[k]);
           fscanf(f1, "%le", &haze_ndens[k]);
-          //printf("Read in layer %d: %e, %e\n", k, haze_ndens[k], 
-          //     haze_radii[k]);
       };
 
 
@@ -243,14 +237,14 @@ void TotalOpac() {
       Locate(NTEMP, opacCH4.T, atmos.T[ll], &a);
       Locate(NPRESSURE, opacCH4.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
-        if (i % 100 == 0) printf("Kappa: %.3e -> ", atmos.kappa[i][ll]);
+        //if (i % 100 == 0) printf("Kappa: %.3e -> ", atmos.kappa[i][ll]);
 	atmos.kappa[i][ll] += lint2D(
 		opacCH4.T[a], opacCH4.T[a+1], opacCH4.P[b], opacCH4.P[b+1],
 		opacCH4.kappa[i][b][a], opacCH4.kappa[i][b][a+1],
 		opacCH4.kappa[i][b+1][a], opacCH4.kappa[i][b+1][a+1],
 		atmos.T[ll], atmos.P[ll])
 				     * atmos.CH4[ll];
-        if (i % 100 == 0) printf("%.3e\n", atmos.kappa[i][ll]);
+        //if (i % 100 == 0) printf("%.3e\n", atmos.kappa[i][ll]);
       }
     }
     
@@ -1161,21 +1155,11 @@ void TotalOpac() {
   free_dmatrix(opac_CIA_O2CO2, 0, NTEMP-1, 0, NLAMBDA-1);
   free_dmatrix(opac_CIA_O2N2, 0, NTEMP-1, 0, NLAMBDA-1);
   free_dmatrix(opac_CIA_O2O2, 0, NTEMP-1, 0, NLAMBDA-1);
-  i = 1;
   free_dmatrix(xsec_haze, 0, NRADII-1, 0 , NLAMBDA-1);
-  printf("%d done\n", i);
-  i++;
   free_dvector(xsec_radii, 0, NRADII-1);
-  printf("%d done\n", i);
-  i++;
   free_dvector(xsec_wl, 0, NLAMBDA-1);
-  printf("%d done\n", i);
-  i++;
   free_dvector(haze_ndens, 0, NTAU-1);
-  printf("%d done\n", i);
-  i++;
   free_dvector(haze_radii, 0, NTAU-1);
-  printf("%d done\n", i);
 
   printf("\n\n***********\nWARNING:  Double check that T-P profile lies within T and P range covered by the opacity data tables!!\n***********\n\n");
   

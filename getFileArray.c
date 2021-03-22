@@ -35,7 +35,7 @@ char** getFileArray(){
   
   
   /* variables*/
-  char pwd[256], extension[35][256], **fileArray;
+  char pwd[256], extension[36][256], **fileArray;
   
   int i, j, lineCount; // array and line counters
   
@@ -48,7 +48,7 @@ char** getFileArray(){
   
   /* Get data from input files */
   
-  int contentLines[3] = {6,8,10};  // 6,8,10 are data containing lines in 'userInput.in'
+  int contentLines[4] = {6,8,10,22};  // 6, 8, 10, 22 are input file lines
   
   input = fopen(input_filename, "r"); //open stream
   
@@ -73,6 +73,11 @@ char** getFileArray(){
         strcpy(extension[i], line);
         i++;
         lineCount++;
+      }
+      else if ((i < 4) && (lineCount == contentLines[i])) {
+          line[strlen(line) - 1] = '\0';
+          strcpy(extension[35], line);
+          lineCount++;
       } /* if line is not pwd and does not contain data*/
       else{
         lineCount++;
@@ -122,8 +127,8 @@ char** getFileArray(){
 
   fclose(input);  // close stream
   
-  fileArray = malloc(35*sizeof(char*)); //allocate the 35 string "slots"
-  for ( j = 0; j < 35; j++){
+  fileArray = malloc(36*sizeof(char*)); //allocate the 35 string "slots"
+  for ( j = 0; j < 36; j++){
     fileArray[j] = (char*)malloc(strlen(pwd)+strlen(extension[j])+1);
     strcpy(fileArray[j], pwd);
     strcat(fileArray[j], extension[j]);
