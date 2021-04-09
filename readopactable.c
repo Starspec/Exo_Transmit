@@ -58,7 +58,7 @@ void ReadOpacTable(struct Opac opac, char *filename) {
   atmos.lambda = dvector(0, NLAMBDA-1);
 
   // Initialize lambda with zeros in case the opacities imported here are skipped
-  memset(atmos.lambda, 0., sizeof atmos.lambda);
+  // memset(atmos.lambda, 0., sizeof atmos.lambda);
 
   opac.NP = NPRESSURE;
   opac.NT = NTEMP; 

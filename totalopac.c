@@ -40,37 +40,39 @@ extern struct Atmos atmos;
 
 struct Chem chem;
 
-struct Opac opacCH4;
-struct Opac opacCO2;
-struct Opac opacCO;
-struct Opac opacH2O;
-struct Opac opacNH3;
-struct Opac opacO2;
-struct Opac opacO3;
-struct Opac opacC2H2;
-struct Opac opacC2H4;
-struct Opac opacC2H6;
-struct Opac opacCrH; 
-struct Opac opacH2CO;
-struct Opac opacH2S; 
-struct Opac opacHCl; 
-struct Opac opacHCN; 
-struct Opac opacHF;
-struct Opac opacMgH; 
-struct Opac opacN2; 
-struct Opac opacNO; 
-struct Opac opacNO2;
-struct Opac opacOH; 
-struct Opac opacOCS;
-struct Opac opacPH3;
-struct Opac opacSH; 
-struct Opac opacSiH; 
-struct Opac opacSiO;
-struct Opac opacSO2; 
-struct Opac opacTiO; 
-struct Opac opacVO; 
-struct Opac opacK; 
-struct Opac opacNa; 
+// struct Opac opacCH4;
+// struct Opac opacCO2;
+// struct Opac opacCO;
+// struct Opac opacH2O;
+// struct Opac opacNH3;
+// struct Opac opacO2;
+// struct Opac opacO3;
+// struct Opac opacC2H2;
+// struct Opac opacC2H4;
+// struct Opac opacC2H6;
+// struct Opac opacCrH; 
+// struct Opac opacH2CO;
+// struct Opac opacH2S; 
+// struct Opac opacHCl; 
+// struct Opac opacHCN; 
+// struct Opac opacHF;
+// struct Opac opacMgH; 
+// struct Opac opacN2; 
+// struct Opac opacNO; 
+// struct Opac opacNO2;
+// struct Opac opacOH; 
+// struct Opac opacOCS;
+// struct Opac opacPH3;
+// struct Opac opacSH; 
+// struct Opac opacSiH; 
+// struct Opac opacSiO;
+// struct Opac opacSO2; 
+// struct Opac opacTiO; 
+// struct Opac opacVO; 
+// struct Opac opacK; 
+// struct Opac opacNa; 
+
+struct Opac opacSpec;
 
 struct Opac opacCIA;
 
@@ -217,729 +219,902 @@ void TotalOpac() {
       };
   };
 
+  // Allocate memory for the opacity arrays
+  opacSpec.name = "all";
+  opacSpec.T = dvector(0, NTEMP-1);
+  opacSpec.P = dvector(0, NTEMP-1);
+  opacSpec.NT = NTEMP;
+  opacSpec.NP = NPRESSURE;
+  opacSpec.Plog10 = dvector(0, NPRESSURE-1);
+  opacSpec.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE, 0, NTEMP-1);
+  opacSpec.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+
   
   /* Fill in CH4 opacities */
   if(chemSelection[0] == 1){          //If CH4 is selected
-    opacCH4.name = "CH4";             //Name it CH4
-    opacCH4.T = dvector(0, NTEMP-1);  //Declare T, P, Plog10, and kappa arrays
-    opacCH4.P = dvector(0, NPRESSURE-1);
-    opacCH4.Plog10 = dvector(0, NPRESSURE-1);
-    opacCH4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    /* Declare abundance */
-    opacCH4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    // opacCH4.name = "CH4";             //Name it CH4
+    // opacCH4.T = dvector(0, NTEMP-1);  //Declare T, P, Plog10, and kappa arrays
+    // opacCH4.P = dvector(0, NPRESSURE-1);
+    // opacCH4.Plog10 = dvector(0, NPRESSURE-1);
+    // opacCH4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // /* Declare abundance */
+    // opacCH4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
       
-    ReadOpacTable(opacCH4, fileArray[3]);     //Read opacity table for CH4
+    ReadOpacTable(opacSpec, fileArray[3]);     //Read opacity table for CH4
     
     printf("Read CH4 Opacity done\n");	     //Confirmation message
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacCH4.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacCH4.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
         //if (i % 100 == 0) printf("Kappa: %.3e -> ", atmos.kappa[i][ll]);
 	atmos.kappa[i][ll] += lint2D(
-		opacCH4.T[a], opacCH4.T[a+1], opacCH4.P[b], opacCH4.P[b+1],
-		opacCH4.kappa[i][b][a], opacCH4.kappa[i][b][a+1],
-		opacCH4.kappa[i][b+1][a], opacCH4.kappa[i][b+1][a+1],
+		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
 		atmos.T[ll], atmos.P[ll])
 				     * atmos.CH4[ll];
         //if (i % 100 == 0) printf("%.3e\n", atmos.kappa[i][ll]);
       }
     }
     
-    FreeOpacTable(opacCH4);                  //Free CH4 opacity table
+    // FreeOpacTable(opacCH4);                  //Free CH4 opacity table
   }
   
   //This procedure repeats for all gases!!
   
   /* Fill in CO2 opacities */
   if(chemSelection[1] == 1){
-    opacCO2.name = "CO2";
-    opacCO2.T = dvector(0, NTEMP-1);
-    opacCO2.P = dvector(0, NPRESSURE-1);
-    opacCO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacCO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacCO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacCO2, fileArray[8]);
+    //opacCO2.name = "CO2";
+    //opacCO2.T = dvector(0, NTEMP-1);
+    //opacCO2.P = dvector(0, NPRESSURE-1);
+    //opacCO2.Plog10 = dvector(0, NPRESSURE-1);
+    //opacCO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    //opacCO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[8]);
     
     printf("Read CO2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacCO2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacCO2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacCO2.T[a], opacCO2.T[a+1], opacCO2.P[b], opacCO2.P[b+1],
-    		opacCO2.kappa[i][b][a], opacCO2.kappa[i][b][a+1],
-    		opacCO2.kappa[i][b+1][a], opacCO2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.CO2[ll];
       }
     }
 
-    FreeOpacTable(opacCO2);
+    // FreeOpacTable(opacCO2);
   }
   
   /* Fill in CO opacities */
   if(chemSelection[2] == 1){
-    opacCO.name = "CO";
-    opacCO.T = dvector(0, NTEMP-1);
-    opacCO.P = dvector(0, NPRESSURE-1);
-    opacCO.Plog10 = dvector(0, NPRESSURE-1);
-    opacCO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacCO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacCO, fileArray[7]);
+    // opacCO.name = "CO";
+    // opacCO.T = dvector(0, NTEMP-1);
+    // opacCO.P = dvector(0, NPRESSURE-1);
+    // opacCO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacCO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacCO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[7]);
     
     printf("Read CO Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacCO.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacCO.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacCO.T[a], opacCO.T[a+1], opacCO.P[b], opacCO.P[b+1],
-    		opacCO.kappa[i][b][a], opacCO.kappa[i][b][a+1],
-    		opacCO.kappa[i][b+1][a], opacCO.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.CO[ll];
       }
     }
 
-    FreeOpacTable(opacCO);
+    // FreeOpacTable(opacCO);
   }
   
   /* Fill in H2O opacities */
   if(chemSelection[3] == 1){
-    opacH2O.name = "H2O";
-    opacH2O.T = dvector(0, NTEMP-1);
-    opacH2O.P = dvector(0, NPRESSURE-1);
-    opacH2O.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2O.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2O.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacH2O, fileArray[10]);
+    //opacH2O.name = "H2O";
+    //opacH2O.T = dvector(0, NTEMP-1);
+    //opacH2O.P = dvector(0, NPRESSURE-1);
+    //opacH2O.Plog10 = dvector(0, NPRESSURE-1);
+    //opacH2O.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    //opacH2O.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[10]);
     
     printf("Read H2O Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacH2O.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacH2O.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacH2O.T[a], opacH2O.T[a+1], opacH2O.P[b], opacH2O.P[b+1],
-    		opacH2O.kappa[i][b][a], opacH2O.kappa[i][b][a+1],
-    		opacH2O.kappa[i][b+1][a], opacH2O.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.H2O[ll];
       }
     }
 
-    FreeOpacTable(opacH2O);
+    // FreeOpacTable(opacH2O);
   }
   
   /* Fill in NH3 opacities */
   if(chemSelection[4] == 1){
-    opacNH3.name = "NH3";
-    opacNH3.T = dvector(0, NTEMP-1);
-    opacNH3.P = dvector(0, NPRESSURE-1);
-    opacNH3.Plog10 = dvector(0, NPRESSURE-1);
-    opacNH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);  
-    ReadOpacTable(opacNH3, fileArray[17]);
+    // opacNH3.name = "NH3";
+    // opacNH3.T = dvector(0, NTEMP-1);
+    // opacNH3.P = dvector(0, NPRESSURE-1);
+    // opacNH3.Plog10 = dvector(0, NPRESSURE-1);
+    // opacNH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacNH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);  
+    ReadOpacTable(opacSpec, fileArray[17]);
     
     printf("Read NH3 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacNH3.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacNH3.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacNH3.T[a], opacNH3.T[a+1], opacNH3.P[b], opacNH3.P[b+1],
-    		opacNH3.kappa[i][b][a], opacNH3.kappa[i][b][a+1],
-    		opacNH3.kappa[i][b+1][a], opacNH3.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.NH3[ll];
       }
     }
 
-    FreeOpacTable(opacNH3);
+    // FreeOpacTable(opacNH3);
   }
   
   /* Fill in O2 opacities */
   if(chemSelection[5] == 1){
-    opacO2.name = "O2";
-    opacO2.T = dvector(0, NTEMP-1);
-    opacO2.P = dvector(0, NPRESSURE-1);
-    opacO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacO2, fileArray[20]);
+    // opacO2.name = "O2";
+    // opacO2.T = dvector(0, NTEMP-1);
+    // opacO2.P = dvector(0, NPRESSURE-1);
+    // opacO2.Plog10 = dvector(0, NPRESSURE-1);
+    // opacO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[20]);
     
     printf("Read O2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacO2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacO2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacO2.T[a], opacO2.T[a+1], opacO2.P[b], opacO2.P[b+1],
-    		opacO2.kappa[i][b][a], opacO2.kappa[i][b][a+1],
-    		opacO2.kappa[i][b+1][a], opacO2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.O2[ll];
       }
     }
 
-    FreeOpacTable(opacO2);
+    // FreeOpacTable(opacO2);
   }
   
   /* Fill in O3 opacities */
   if(chemSelection[6] == 1){
-    opacO3.name = "O3";
-    opacO3.T = dvector(0, NTEMP-1);
-    opacO3.P = dvector(0, NPRESSURE-1);
-    opacO3.Plog10 = dvector(0, NPRESSURE-1);
-    opacO3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacO3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacO3, fileArray[21]);
+    // opacO3.name = "O3";
+    // opacO3.T = dvector(0, NTEMP-1);
+    // opacO3.P = dvector(0, NPRESSURE-1);
+    // opacO3.Plog10 = dvector(0, NPRESSURE-1);
+    // opacO3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacO3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[21]);
     
     printf("Read O3 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacO3.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacO3.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacO3.T[a], opacO3.T[a+1], opacO3.P[b], opacO3.P[b+1],
-    		opacO3.kappa[i][b][a], opacO3.kappa[i][b][a+1],
-    		opacO3.kappa[i][b+1][a], opacO3.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.O3[ll];
       }
     }
     
-    FreeOpacTable(opacO3);
+    // FreeOpacTable(opacO3);
   }
   
   /* Fill in C2H2 opacities */
   if(chemSelection[7] == 1){
-    opacC2H2.name = "C2H2";
-    opacC2H2.T = dvector(0, NTEMP-1);
-    opacC2H2.P = dvector(0, NPRESSURE-1);
-    opacC2H2.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacC2H2, fileArray[4]);
+    // opacC2H2.name = "C2H2";
+    // opacC2H2.T = dvector(0, NTEMP-1);
+    // opacC2H2.P = dvector(0, NPRESSURE-1);
+    // opacC2H2.Plog10 = dvector(0, NPRESSURE-1);
+    // opacC2H2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacC2H2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[4]);
     
     printf("Read C2H2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacC2H2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacC2H2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacC2H2.T[a], opacC2H2.T[a+1], opacC2H2.P[b], opacC2H2.P[b+1],
-    		opacC2H2.kappa[i][b][a], opacC2H2.kappa[i][b][a+1],
-    		opacC2H2.kappa[i][b+1][a], opacC2H2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.C2H2[ll];
       }
     }
 
-    FreeOpacTable(opacC2H2);
+    // FreeOpacTable(opacC2H2);
   }
   
   /* Fill in C2H4 opacities */
   if(chemSelection[8] == 1){
-    opacC2H4.name = "C2H4";
-    opacC2H4.T = dvector(0, NTEMP-1);
-    opacC2H4.P = dvector(0, NPRESSURE-1);
-    opacC2H4.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacC2H4, fileArray[5]);
+    // opacC2H4.name = "C2H4";
+    // opacC2H4.T = dvector(0, NTEMP-1);
+    // opacC2H4.P = dvector(0, NPRESSURE-1);
+    // opacC2H4.Plog10 = dvector(0, NPRESSURE-1);
+    // opacC2H4.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacC2H4.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[5]);
     
     printf("Read C2H4 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacC2H4.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacC2H4.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacC2H4.T[a], opacC2H4.T[a+1], opacC2H4.P[b], opacC2H4.P[b+1],
-    		opacC2H4.kappa[i][b][a], opacC2H4.kappa[i][b][a+1],
-    		opacC2H4.kappa[i][b+1][a], opacC2H4.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.C2H4[ll];
       }
     }
 
-    FreeOpacTable(opacC2H4);
+    // FreeOpacTable(opacC2H4);
   }
   
   /* Fill in C2H6 opacities */
   if(chemSelection[9] == 1){
-    opacC2H6.name = "C2H6";
-    opacC2H6.T = dvector(0, NTEMP-1);
-    opacC2H6.P = dvector(0, NPRESSURE-1);
-    opacC2H6.Plog10 = dvector(0, NPRESSURE-1);
-    opacC2H6.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacC2H6.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacC2H6, fileArray[6]);
+    // opacC2H6.name = "C2H6";
+    // opacC2H6.T = dvector(0, NTEMP-1);
+    // opacC2H6.P = dvector(0, NPRESSURE-1);
+    // opacC2H6.Plog10 = dvector(0, NPRESSURE-1);
+    // opacC2H6.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacC2H6.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[6]);
     
     printf("Read C2H6 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacC2H6.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacC2H6.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacC2H6.T[a], opacC2H6.T[a+1], opacC2H6.P[b], opacC2H6.P[b+1],
-    		opacC2H6.kappa[i][b][a], opacC2H6.kappa[i][b][a+1],
-    		opacC2H6.kappa[i][b+1][a], opacC2H6.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.C2H6[ll];
       }
     }
 
-    FreeOpacTable(opacC2H6);
+    // FreeOpacTable(opacC2H6);
   }
   
   /* Fill in H2CO opacities */
   if(chemSelection[10] == 1){
-    opacH2CO.name = "H2CO";
-    opacH2CO.T = dvector(0, NTEMP-1);
-    opacH2CO.P = dvector(0, NPRESSURE-1);
-    opacH2CO.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2CO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2CO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacH2CO, fileArray[9]);
+    // opacH2CO.name = "H2CO";
+    // opacH2CO.T = dvector(0, NTEMP-1);
+    // opacH2CO.P = dvector(0, NPRESSURE-1);
+    // opacH2CO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacH2CO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacH2CO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[9]);
     
     printf("Read H2CO Opacity done\n");
    
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacH2CO.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacH2CO.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacH2CO.T[a], opacH2CO.T[a+1], opacH2CO.P[b], opacH2CO.P[b+1],
-    		opacH2CO.kappa[i][b][a], opacH2CO.kappa[i][b][a+1],
-    		opacH2CO.kappa[i][b+1][a], opacH2CO.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.H2CO[ll];
       }
     }
  
-    FreeOpacTable(opacH2CO);
+    // FreeOpacTable(opacH2CO);
   }
   
   /* Fill in H2S opacities */
   if(chemSelection[11] == 1){
-    opacH2S.name = "H2S";
-    opacH2S.T = dvector(0, NTEMP-1);
-    opacH2S.P = dvector(0, NPRESSURE-1);
-    opacH2S.Plog10 = dvector(0, NPRESSURE-1);
-    opacH2S.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacH2S.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacH2S, fileArray[11]);
+    // opacH2S.name = "H2S";
+    // opacH2S.T = dvector(0, NTEMP-1);
+    // opacH2S.P = dvector(0, NPRESSURE-1);
+    // opacH2S.Plog10 = dvector(0, NPRESSURE-1);
+    // opacH2S.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacH2S.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[11]);
     
     printf("Read H2S Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacH2S.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacH2S.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacH2S.T[a], opacH2S.T[a+1], opacH2S.P[b], opacH2S.P[b+1],
-    		opacH2S.kappa[i][b][a], opacH2S.kappa[i][b][a+1],
-    		opacH2S.kappa[i][b+1][a], opacH2S.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.H2S[ll];
       }
     }
 
-    FreeOpacTable(opacH2S);
+    // FreeOpacTable(opacH2S);
   }
   
   /* Fill in HCl opacities */
   if(chemSelection[12] == 1){
-    opacHCl.name = "HCl";
-    opacHCl.T = dvector(0, NTEMP-1);
-    opacHCl.P = dvector(0, NPRESSURE-1);
-    opacHCl.Plog10 = dvector(0, NPRESSURE-1);
-    opacHCl.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHCl.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacHCl, fileArray[13]);
+    // opacHCl.name = "HCl";
+    // opacHCl.T = dvector(0, NTEMP-1);
+    // opacHCl.P = dvector(0, NPRESSURE-1);
+    // opacHCl.Plog10 = dvector(0, NPRESSURE-1);
+    // opacHCl.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacHCl.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[13]);
     
     printf("Read HCl Opacity done\n");
 
-    FreeOpacTable(opacHCl);
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.H2S[ll];
+      }
+    }
+
+    // FreeOpacTable(opacHCl);
   }
   
   /* Fill in HCN opacities */
   if(chemSelection[13] == 1){
-    opacHCN.name = "HCN";
-    opacHCN.T = dvector(0, NTEMP-1);
-    opacHCN.P = dvector(0, NPRESSURE-1);
-    opacHCN.Plog10 = dvector(0, NPRESSURE-1);
-    opacHCN.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHCN.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacHCN, fileArray[12]);
+    // opacHCN.name = "HCN";
+    // opacHCN.T = dvector(0, NTEMP-1);
+    // opacHCN.P = dvector(0, NPRESSURE-1);
+    // opacHCN.Plog10 = dvector(0, NPRESSURE-1);
+    // opacHCN.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacHCN.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[12]);
     
     printf("Read HCN Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacHCN.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacHCN.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacHCN.T[a], opacHCN.T[a+1], opacHCN.P[b], opacHCN.P[b+1],
-    		opacHCN.kappa[i][b][a], opacHCN.kappa[i][b][a+1],
-    		opacHCN.kappa[i][b+1][a], opacHCN.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.HCN[ll];
       }
     }
     
-    FreeOpacTable(opacHCN);
+    // FreeOpacTable(opacHCN);
   }
   
-  /* Fill in HF opacities */
-  if(chemSelection[14] == 1){
-    opacHF.name = "HF";
-    opacHF.T = dvector(0, NTEMP-1);
-    opacHF.P = dvector(0, NPRESSURE-1);
-    opacHF.Plog10 = dvector(0, NPRESSURE-1);
-    opacHF.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacHF.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacHF, fileArray[14]);
-    
-    printf("Read HF Opacity done\n");
+  /* TK COMMENTING OUT THE SPECIES NOT BEING USED AT ALL */
 
-    FreeOpacTable(opacHF);
-  }
+//   /* Fill in HF opacities */
+//   if(chemSelection[14] == 1){
+//     // opacHF.name = "HF";
+//     // opacHF.T = dvector(0, NTEMP-1);
+//     // opacHF.P = dvector(0, NPRESSURE-1);
+//     // opacHF.Plog10 = dvector(0, NPRESSURE-1);
+//     // opacHF.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+//     // opacHF.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+//     ReadOpacTable(opacSpec, fileArray[14]);
+//     
+//     printf("Read HF Opacity done\n");
+// 
+//     /* interpolate and add to overall atmos.kappa */
+//     for(ll=0; ll<NTAU; ll++){
+//       Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+//       Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+//       for(i=0; i<NLAMBDA; i++){
+//     	atmos.kappa[i][ll] += lint2D(
+//     		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+//     		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+//     		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+//     		atmos.T[ll], atmos.P[ll])
+//     				     * atmos.HF[ll];
+//       }
+//     }
+//     printf("Opacity HF added to atmospheric opacity.\n");
+// 
+//     // FreeOpacTable(opacHF);
+//   }
   
-  /* Fill in MgH opacities */
-  if(chemSelection[15] == 1){
-    opacMgH.name = "MgH";
-    opacMgH.T = dvector(0, NTEMP-1);
-    opacMgH.P = dvector(0, NPRESSURE-1);
-    opacMgH.Plog10 = dvector(0, NPRESSURE-1);
-    opacMgH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacMgH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacMgH, fileArray[15]);
-    
-    printf("Read MgH Opacity done\n");
-
-    FreeOpacTable(opacMgH);
-  }
+//   /* Fill in MgH opacities */
+//   if(chemSelection[15] == 1){
+//     // opacMgH.name = "MgH";
+//     // opacMgH.T = dvector(0, NTEMP-1);
+//     // opacMgH.P = dvector(0, NPRESSURE-1);
+//     // opacMgH.Plog10 = dvector(0, NPRESSURE-1);
+//     // opacMgH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+//     // opacMgH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+//     ReadOpacTable(opacSpec, fileArray[15]);
+//     
+//     printf("Read MgH Opacity done\n");
+// 
+//     for(ll=0; ll<NTAU; ll++){
+//       Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+//       Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+//       for(i=0; i<NLAMBDA; i++){
+//     	atmos.kappa[i][ll] += lint2D(
+//     		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+//     		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+//     		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+//     		atmos.T[ll], atmos.P[ll])
+//     				     * atmos.MgH[ll];
+//       }
+//     }
+// 
+// 
+//     // FreeOpacTable(opacMgH);
+//   }
   
   /* Fill in N2 opacities */
   if(chemSelection[16] == 1){
-    opacN2.name = "N2";
-    opacN2.T = dvector(0, NTEMP-1);
-    opacN2.P = dvector(0, NPRESSURE-1);
-    opacN2.Plog10 = dvector(0, NPRESSURE-1);
-    opacN2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacN2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacN2, fileArray[16]);
+    // opacN2.name = "N2";
+    // opacN2.T = dvector(0, NTEMP-1);
+    // opacN2.P = dvector(0, NPRESSURE-1);
+    // opacN2.Plog10 = dvector(0, NPRESSURE-1);
+    // opacN2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacN2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[16]);
     
     printf("Read N2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacN2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacN2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacN2.T[a], opacN2.T[a+1], opacN2.P[b], opacN2.P[b+1],
-    		opacN2.kappa[i][b][a], opacN2.kappa[i][b][a+1],
-    		opacN2.kappa[i][b+1][a], opacN2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.N2[ll];
       }
     }
 
-    FreeOpacTable(opacN2);
+    // FreeOpacTable(opacN2);
   }
   
   /* Fill in NO opacities */
   if(chemSelection[17] == 1){
-    opacNO.name = "NO";
-    opacNO.T = dvector(0, NTEMP-1);
-    opacNO.P = dvector(0, NPRESSURE-1);
-    opacNO.Plog10 = dvector(0, NPRESSURE-1);
-    opacNO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacNO, fileArray[18]);
+    // opacNO.name = "NO";
+    // opacNO.T = dvector(0, NTEMP-1);
+    // opacNO.P = dvector(0, NPRESSURE-1);
+    // opacNO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacNO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacNO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[18]);
     
     printf("Read NO Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacNO.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacNO.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacNO.T[a], opacNO.T[a+1], opacNO.P[b], opacNO.P[b+1],
-    		opacNO.kappa[i][b][a], opacNO.kappa[i][b][a+1],
-    		opacNO.kappa[i][b+1][a], opacNO.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.NO[ll];
       }
     }
 
-    FreeOpacTable(opacNO);
+    // FreeOpacTable(opacNO);
   }
   
   /* Fill in NO2 opacities */
   if(chemSelection[18] == 1){
-    opacNO2.name = "NO2";
-    opacNO2.T = dvector(0, NTEMP-1);
-    opacNO2.P = dvector(0, NPRESSURE-1);
-    opacNO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacNO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacNO2, fileArray[19]);
+    // opacNO2.name = "NO2";
+    // opacNO2.T = dvector(0, NTEMP-1);
+    // opacNO2.P = dvector(0, NPRESSURE-1);
+    // opacNO2.Plog10 = dvector(0, NPRESSURE-1);
+    // opacNO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacNO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[19]);
     
     printf("Read NO2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacNO2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacNO2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacNO2.T[a], opacNO2.T[a+1], opacNO2.P[b], opacNO2.P[b+1],
-    		opacNO2.kappa[i][b][a], opacNO2.kappa[i][b][a+1],
-    		opacNO2.kappa[i][b+1][a], opacNO2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.NO2[ll];
       }
     }
 
-    FreeOpacTable(opacNO2);
+    // FreeOpacTable(opacNO2);
   }
   
   /* Fill in OCS opacities */
   if(chemSelection[19] == 1){
-    opacOCS.name = "OCS";
-    opacOCS.T = dvector(0, NTEMP-1);
-    opacOCS.P = dvector(0, NPRESSURE-1);
-    opacOCS.Plog10 = dvector(0, NPRESSURE-1);
-    opacOCS.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacOCS.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacOCS, fileArray[22]);
+    // opacOCS.name = "OCS";
+    // opacOCS.T = dvector(0, NTEMP-1);
+    // opacOCS.P = dvector(0, NPRESSURE-1);
+    // opacOCS.Plog10 = dvector(0, NPRESSURE-1);
+    // opacOCS.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacOCS.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[22]);
     
     printf("Read OCS Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacOCS.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacOCS.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacOCS.T[a], opacOCS.T[a+1], opacOCS.P[b], opacOCS.P[b+1],
-    		opacOCS.kappa[i][b][a], opacOCS.kappa[i][b][a+1],
-    		opacOCS.kappa[i][b+1][a], opacOCS.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.OCS[ll];
       }
     }
 
-    FreeOpacTable(opacOCS);
+    // FreeOpacTable(opacOCS);
   }
   
   /* Fill in OH opacities */
   if(chemSelection[20] == 1){
-    opacOH.name = "OH";
-    opacOH.T = dvector(0, NTEMP-1);
-    opacOH.P = dvector(0, NPRESSURE-1);
-    opacOH.Plog10 = dvector(0, NPRESSURE-1);
-    opacOH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacOH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacOH, fileArray[23]);
+    // opacOH.name = "OH";
+    // opacOH.T = dvector(0, NTEMP-1);
+    // opacOH.P = dvector(0, NPRESSURE-1);
+    // opacOH.Plog10 = dvector(0, NPRESSURE-1);
+    // opacOH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacOH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[23]);
     
     printf("Read OH Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacOH.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacOH.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacOH.T[a], opacOH.T[a+1], opacOH.P[b], opacOH.P[b+1],
-    		opacOH.kappa[i][b][a], opacOH.kappa[i][b][a+1],
-    		opacOH.kappa[i][b+1][a], opacOH.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.OH[ll];
       }
     }
 
-    FreeOpacTable(opacOH);
+    // FreeOpacTable(opacOH);
   }
   
   /* Fill in PH3 opacities */
   if(chemSelection[21] == 1){
-    opacPH3.name = "PH3";
-    opacPH3.T = dvector(0, NTEMP-1);
-    opacPH3.P = dvector(0, NPRESSURE-1);
-    opacPH3.Plog10 = dvector(0, NPRESSURE-1);
-    opacPH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacPH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacPH3, fileArray[24]);
+    // opacPH3.name = "PH3";
+    // opacPH3.T = dvector(0, NTEMP-1);
+    // opacPH3.P = dvector(0, NPRESSURE-1);
+    // opacPH3.Plog10 = dvector(0, NPRESSURE-1);
+    // opacPH3.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacPH3.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[24]);
     
     printf("Read PH3 Opacity done\n");
 
-    FreeOpacTable(opacPH3);
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
+    // FreeOpacTable(opacPH3);
   }
   
   /* Fill in SH opacities */
   if(chemSelection[22] == 1){
-    opacSH.name = "SH";
-    opacSH.T = dvector(0, NTEMP-1);
-    opacSH.P = dvector(0, NPRESSURE-1);
-    opacSH.Plog10 = dvector(0, NPRESSURE-1);
-    opacSH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacSH, fileArray[25]);
+    // opacSH.name = "SH";
+    // opacSH.T = dvector(0, NTEMP-1);
+    // opacSH.P = dvector(0, NPRESSURE-1);
+    // opacSH.Plog10 = dvector(0, NPRESSURE-1);
+    // opacSH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacSH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[25]);
     
     printf("Read SH Opacity done\n");
 
-    FreeOpacTable(opacSH);
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
+    // FreeOpacTable(opacSH);
   }
   
   /* Fill in SiH opacities */
   if(chemSelection[23] == 1){
-    opacSiH.name = "SiH";
-    opacSiH.T = dvector(0, NTEMP-1);
-    opacSiH.P = dvector(0, NPRESSURE-1);
-    opacSiH.Plog10 = dvector(0, NPRESSURE-1);
-    opacSiH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSiH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacSiH, fileArray[27]);
+    // opacSiH.name = "SiH";
+    // opacSiH.T = dvector(0, NTEMP-1);
+    // opacSiH.P = dvector(0, NPRESSURE-1);
+    // opacSiH.Plog10 = dvector(0, NPRESSURE-1);
+    // opacSiH.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacSiH.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[27]);
     
     printf("Read SiH Opacity done\n");
 
-    FreeOpacTable(opacSiH); 
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
+
+    // FreeOpacTable(opacSiH); 
   }
   
   /* Fill in SiO opacities */
   if(chemSelection[24] == 1){
-    opacSiO.name = "SiO";
-    opacSiO.T = dvector(0, NTEMP-1);
-    opacSiO.P = dvector(0, NPRESSURE-1);
-    opacSiO.Plog10 = dvector(0, NPRESSURE-1);
-    opacSiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacSiO, fileArray[28]);
+    // opacSiO.name = "SiO";
+    // opacSiO.T = dvector(0, NTEMP-1);
+    // opacSiO.P = dvector(0, NPRESSURE-1);
+    // opacSiO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacSiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacSiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[28]);
     
     printf("Read SiO Opacity done\n");
 
-    FreeOpacTable(opacSiO);
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
+
+    // FreeOpacTable(opacSiO);
   }
   
   /* Fill in SO2 opacities */
   if(chemSelection[25] == 1){
-    opacSO2.name = "SO2";
-    opacSO2.T = dvector(0, NTEMP-1);
-    opacSO2.P = dvector(0, NPRESSURE-1);
-    opacSO2.Plog10 = dvector(0, NPRESSURE-1);
-    opacSO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacSO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacSO2, fileArray[26]);
+    // opacSO2.name = "SO2";
+    // opacSO2.T = dvector(0, NTEMP-1);
+    // opacSO2.P = dvector(0, NPRESSURE-1);
+    // opacSO2.Plog10 = dvector(0, NPRESSURE-1);
+    // opacSO2.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacSO2.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[26]);
     
     printf("Read SO2 Opacity done\n");
 
     /* Interpolate and add to overall atmos.kappa */
     for(ll=0; ll<NTAU; ll++){
-      Locate(NTEMP, opacSO2.T, atmos.T[ll], &a);
-      Locate(NPRESSURE, opacSO2.P, atmos.P[ll], &b);
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
       for(i=0; i<NLAMBDA; i++){
     	atmos.kappa[i][ll] += lint2D(
-    		opacSO2.T[a], opacSO2.T[a+1], opacSO2.P[b], opacSO2.P[b+1],
-    		opacSO2.kappa[i][b][a], opacSO2.kappa[i][b][a+1],
-    		opacSO2.kappa[i][b+1][a], opacSO2.kappa[i][b+1][a+1],
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
     		atmos.T[ll], atmos.P[ll])
     				     * atmos.SO2[ll];
       }
     }
 
-    FreeOpacTable(opacSO2);
+    // FreeOpacTable(opacSO2);
   }
   
   /* Fill in TiO opacities */
   if(chemSelection[26] == 1){
-    opacTiO.name = "TiO";
-    opacTiO.T = dvector(0, NTEMP-1);
-    opacTiO.P = dvector(0, NPRESSURE-1);
-    opacTiO.Plog10 = dvector(0, NPRESSURE-1);
-    opacTiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacTiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacTiO, fileArray[29]);
+    // opacTiO.name = "TiO";
+    // opacTiO.T = dvector(0, NTEMP-1);
+    // opacTiO.P = dvector(0, NPRESSURE-1);
+    // opacTiO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacTiO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacTiO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[29]);
     
     printf("Read TiO Opacity done\n");
 
-    FreeOpacTable(opacTiO);
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
+
+    // FreeOpacTable(opacTiO);
   }
   
   /* Fill in VO opacities */
   if(chemSelection[27] == 1){
-    opacVO.name = "VO";
-    opacVO.T = dvector(0, NTEMP-1);
-    opacVO.P = dvector(0, NPRESSURE-1);
-    opacVO.Plog10 = dvector(0, NPRESSURE-1);
-    opacVO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacVO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacVO, fileArray[30]);
+    // opacVO.name = "VO";
+    // opacVO.T = dvector(0, NTEMP-1);
+    // opacVO.P = dvector(0, NPRESSURE-1);
+    // opacVO.Plog10 = dvector(0, NPRESSURE-1);
+    // opacVO.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacVO.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[30]);
     
     printf("Read VO Opacity done\n");
+
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
     
-    FreeOpacTable(opacVO);
+    // FreeOpacTable(opacVO);
   }
 
   /* Atomic opacities */
 
   /* Fill in Na opacities */
   if(chemSelection[28] == 1){
-    opacNa.name = "Na";
-    opacNa.T = dvector(0, NTEMP-1);
-    opacNa.P = dvector(0, NPRESSURE-1);
-    opacNa.Plog10 = dvector(0, NPRESSURE-1);
-    opacNa.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacNa.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacNa, fileArray[31]);
+    // opacNa.name = "Na";
+    // opacNa.T = dvector(0, NTEMP-1);
+    // opacNa.P = dvector(0, NPRESSURE-1);
+    // opacNa.Plog10 = dvector(0, NPRESSURE-1);
+    // opacNa.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacNa.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[31]);
     
     printf("Read Na Opacity done\n");
+
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
     
-    FreeOpacTable(opacNa);
+    // FreeOpacTable(opacNa);
   }
 
   /* Fill in K opacities */
   if(chemSelection[29] == 1){
-    opacK.name = "K";
-    opacK.T = dvector(0, NTEMP-1);
-    opacK.P = dvector(0, NPRESSURE-1);
-    opacK.Plog10 = dvector(0, NPRESSURE-1);
-    opacK.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
-    opacK.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
-    ReadOpacTable(opacK, fileArray[32]);
+    // opacK.name = "K";
+    // opacK.T = dvector(0, NTEMP-1);
+    // opacK.P = dvector(0, NPRESSURE-1);
+    // opacK.Plog10 = dvector(0, NPRESSURE-1);
+    // opacK.kappa = d3tensor(0, NLAMBDA-1, 0, NPRESSURE-1, 0, NTEMP-1);
+    // opacK.abundance = dmatrix(0, NPRESSURE-1, 0, NTEMP-1);
+    ReadOpacTable(opacSpec, fileArray[32]);
     
     printf("Read K Opacity done\n");
+
+    /* Interpolate and add to overall atmos.kappa */
+    for(ll=0; ll<NTAU; ll++){
+      Locate(NTEMP, opacSpec.T, atmos.T[ll], &a);
+      Locate(NPRESSURE, opacSpec.P, atmos.P[ll], &b);
+      for(i=0; i<NLAMBDA; i++){
+    	atmos.kappa[i][ll] += lint2D(
+    		opacSpec.T[a], opacSpec.T[a+1], opacSpec.P[b], opacSpec.P[b+1],
+    		opacSpec.kappa[i][b][a], opacSpec.kappa[i][b][a+1],
+    		opacSpec.kappa[i][b+1][a], opacSpec.kappa[i][b+1][a+1],
+    		atmos.T[ll], atmos.P[ll])
+    				     * atmos.OH[ll];
+      }
+    }
+
     
-    FreeOpacTable(opacK);
+    // FreeOpacTable(opacK);
   }
   
   /* Fill in collision-induced opacities */
