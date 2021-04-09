@@ -196,11 +196,11 @@ void TotalOpac() {
       f1 = fopen(fileArray[35], "r");
       fscanf(f1, "%*[^\n]\n");
 
+
       for (k=0; k<NTAU; k++) {
           fscanf(f1, "%le", &haze_radii[k]);
           fscanf(f1, "%le", &haze_ndens[k]);
       };
-
 
       
       fclose(f1);
