@@ -46,4 +46,6 @@ On line 46 write the number of wavelength points in the grid:
 4616
 On line 48 write the number of optical depth points:
 200
+On line 50 write the number of haze radii in haze_opac/haze_opacities.dat:
+65
 End of otherInput.c (Do not change this line!)

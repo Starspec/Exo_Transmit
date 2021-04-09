@@ -3,11 +3,11 @@ Formatting here is very important, please put the instructed content on the inst
 Exo_Transmit home directory:
 /ganymede1/teal/Exo_Transmit
 Temperature-Pressure data file:
-/T_P/archean_GJ436_recon_noise.dat
+/T_P/archean_GJ876_recon_zero.dat
 Equation of State file:
 Not_used
 Output file:
-/Spectra/archean_GJ436_recon_noise.dat
+/Spectra/species_runs_HAZE.dat
 Planet surface gravity (in m/s^-2):      
 9.8
 Planet radius (in m): -- This is the planet's radius at the base of the atmosphere (or at the cloud top for cloudy calculations) 
@@ -19,5 +19,5 @@ Pressure of cloud top (in Pa), -- or leave at 0.0 if you want no cloud calculati
 Rayleigh scattering augmentation factor -- default is 1.0.  Can be increased to simulate additional sources of scattering.  0.0 turns off Rayleigh scattering.  
 1.0
 Haze input file
-/haze_input/archean_GJ436_recon_noise.dat
+/haze_input/archean_GJ876.dat
 End of userInput.in (Do not change this line)

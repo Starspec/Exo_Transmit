@@ -31,4 +31,5 @@ Na = 1
 K = 1
 Scattering = 1
 Collision Induced Absorption = 1
+HAZE = 1
 Do not delete this line!
